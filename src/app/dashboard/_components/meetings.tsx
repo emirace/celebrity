@@ -1,4 +1,4 @@
-import { FiCalendar, FiChevronRight, FiExternalLink } from "react-icons/fi";
+import { FiCalendar } from "react-icons/fi";
 
 // const meetings = [
 // {

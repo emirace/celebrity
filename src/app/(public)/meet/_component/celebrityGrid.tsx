@@ -2,7 +2,7 @@
 
 import CelebrityCard from "./celebrityCard";
 import { useToastNotification } from "@/contexts/toastNotification";
-import { userFetchCelebrities } from "@/services/user";
+import { fetchCelebrities } from "@/services/user";
 import { IUser } from "@/types/user";
 import { useState, useEffect } from "react";
 import Loading from "@/app/_components/loading";
@@ -18,7 +18,7 @@ const CelebrityGrid = () => {
   const loadCelebrities = async () => {
     try {
       setLoading(true);
-      const res = await userFetchCelebrities({ search, page });
+      const res = await fetchCelebrities({ search, page });
       setCelebrities(res.celebrities);
     } catch (error) {
       console.error("Error fetching celebrities:", error);

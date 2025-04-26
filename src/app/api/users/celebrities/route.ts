@@ -1,15 +1,10 @@
 import User from "@/models/user";
 import { auth } from "@/utils/auth";
 import connectDB from "@/utils/database";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
-export const GET = auth(async function GET(request) {
+export async function GET(request: NextRequest) {
   await connectDB();
-  if (request.user.role !== "Admin") {
-    return new NextResponse("Unauthorized", {
-      status: 401,
-    });
-  }
 
   const searchParams = request.nextUrl.searchParams;
   const search = searchParams.get("search");
@@ -30,7 +25,7 @@ export const GET = auth(async function GET(request) {
   const total = await User.countDocuments({ ...query, role: "Celebrity" });
   const totalPages = Math.ceil(total / Number(limit));
   const celebrities = await User.find({ ...query, role: "Celebrity" })
-    .select("-password")
+    .select("image fullName job")
     .sort({ [sort]: sortOrder })
     .skip(skip)
     .limit(Number(limit));
@@ -48,7 +43,7 @@ export const GET = auth(async function GET(request) {
       headers: { "Content-Type": "application/json" },
     }
   );
-});
+}
 
 export const POST = auth(async function POST(request) {
   try {

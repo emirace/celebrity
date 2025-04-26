@@ -1,5 +1,6 @@
 "use client";
 
+import { useUser } from "@/contexts/user";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -60,6 +61,7 @@ const menuItems = [
 export default function Sidebar() {
   const [collapsed, setCollapsed] = useState(false);
   const pathname = usePathname();
+  const { logout } = useUser();
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(max-width: 768px)");
@@ -175,6 +177,7 @@ export default function Sidebar() {
           )}
         </div>
         <div
+          onClick={logout}
           className={`flex items-center space-x-3 px-3 py-3 rounded-md transition-all hover:bg-red-50 text-gray-800 cursor-pointer
                     ${collapsed ? "justify-center" : "justify-start"}
                     `}

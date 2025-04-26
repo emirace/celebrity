@@ -48,9 +48,12 @@ const Hero = () => {
             >
               Get Started
             </Link>
-            <button className="bg-gray-100 text-black px-6 py-3 rounded-lg text-sm font-medium hover:bg-gray-200 transition">
+            <a
+              href="#services"
+              className="bg-gray-100 text-black px-6 py-3 rounded-lg text-sm font-medium hover:bg-gray-200 transition"
+            >
               Explore
-            </button>
+            </a>
           </div>
 
           {/* Rating and Social Icons */}

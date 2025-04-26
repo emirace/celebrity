@@ -1,23 +1,17 @@
 "use client";
 
+import Loading from "@/app/_components/loading";
 import { useUser } from "@/contexts/user";
 import { redirect } from "next/navigation";
-import Loading from "../_components/loading";
-import AuthNav from "./_components/authNav";
-import { useEffect } from "react";
+import { usePathname } from "next/navigation";
 
-export default function Layout({
+export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   const { user, loading } = useUser();
-
-  useEffect(() => {
-    if (!loading && user) {
-      redirect("/dashboard");
-    }
-  }, [loading]);
+  const pathname = usePathname();
 
   if (loading)
     return (
@@ -25,11 +19,6 @@ export default function Layout({
         <Loading />
       </div>
     );
-
-  return (
-    <div>
-      <AuthNav />
-      {children}
-    </div>
-  );
+  if (!user) return redirect(`/login?redirecturl=${pathname}`);
+  return <div>{children}</div>;
 }

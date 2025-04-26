@@ -87,7 +87,7 @@ const Membership = () => {
                 </div>
                 <h4 className="font-medium text-sm">{card.name}</h4>
                 <div className="flex items-center gap-2 mt-2">
-                  <span className="font-bold text-xl">{card.price}</span>
+                  <span className="font-bold text-xl">${card.price}</span>
                 </div>
               </div>
             ))

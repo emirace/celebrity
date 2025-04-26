@@ -47,7 +47,7 @@ export const UserProvider = ({ children }: UserProviderProps) => {
 
   const logout = () => {
     setUser(null);
-    localStorage.removeItem("authToken");
+    localStorage.removeItem("token");
   };
 
   useEffect(() => {

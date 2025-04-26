@@ -6,11 +6,13 @@ import { useUser } from "@/contexts/user";
 import { loginUser } from "@/services/auth";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { FormEvent, useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 function Login() {
+  const searchParams = useSearchParams();
+  const redirecturl = searchParams.get("redirecturl");
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -18,7 +20,6 @@ function Login() {
   const { addNotification } = useToastNotification();
   const { getUser } = useUser();
   const [loading, setLoading] = useState(false);
-
   const submitHandler = async (e: FormEvent) => {
     e.preventDefault();
     try {
@@ -36,6 +37,11 @@ function Login() {
         password,
       });
       await getUser();
+      if (redirecturl) {
+        router.push(redirecturl);
+      } else {
+        router.push("/dashboard");
+      }
     } catch (error) {
       addNotification({
         message: (error as string) || "An error occurred",

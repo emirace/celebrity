@@ -6,7 +6,7 @@ import { getFanCards } from "@/services/fanCard";
 import { IFanCard } from "@/types/fanCard";
 import moment from "moment";
 import Image from "next/image";
-import React, { use, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { QRCodeSVG } from "qrcode.react";
 
 function FanCard() {
@@ -20,8 +20,8 @@ function FanCard() {
         setLoading(true);
         const response = await getFanCards();
         setFanCard(response);
-      } catch (error: any) {
-        addNotification({ message: error, error: true });
+      } catch (error) {
+        addNotification({ message: error as string, error: true });
       } finally {
         setLoading(false);
       }

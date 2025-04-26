@@ -1,25 +1,28 @@
 import Loading from "@/app/_components/loading";
 import { useSetting } from "@/contexts/setting";
 import { useToastNotification } from "@/contexts/toastNotification";
-import { useUser } from "@/contexts/user";
 import { processPayment } from "@/services/payment";
 import { useRouter } from "next/navigation";
 import React, { useState, useEffect } from "react";
 import { FaRegCopy } from "react-icons/fa";
 import { QRCodeSVG } from "qrcode.react";
 
-const CryptoPayment: React.FC<{ price?: number; type: string; meta: any }> = ({
-  price,
-  meta,
-  type,
-}) => {
-  const { user } = useUser();
+const CryptoPayment: React.FC<{
+  price?: number;
+  type: string;
+  meta: object;
+}> = ({ price, meta, type }) => {
   const { addNotification } = useToastNotification();
   const [loadingPayment, setLoadingPayment] = useState(false);
   const { settings, fetchSettings } = useSetting();
   const [amount, setAmount] = useState(0);
   const [loading, setLoading] = useState(false);
-  const [selectedCrypto, setSelectedCrypto] = useState<any>(null);
+  const [selectedCrypto, setSelectedCrypto] = useState<{
+    name: string;
+    network: string;
+    address: string;
+    rate: number;
+  } | null>(null);
   const [timeLeft, setTimeLeft] = useState(15 * 60 + 56);
 
   const router = useRouter();
@@ -36,9 +39,10 @@ const CryptoPayment: React.FC<{ price?: number; type: string; meta: any }> = ({
       try {
         setLoading(true);
         await fetchSettings();
-      } catch (error: any) {
+      } catch (error) {
         addNotification({
-          message: error || "An error occurred while fetching settings.",
+          message:
+            (error as string) || "An error occurred while fetching settings.",
           error: true,
         });
       } finally {
@@ -76,14 +80,14 @@ const CryptoPayment: React.FC<{ price?: number; type: string; meta: any }> = ({
 
       await processPayment({
         amount,
-        currency: selectedCrypto.name,
+        currency: selectedCrypto!.name,
         meta,
         paymentMethod: "crypto",
         type,
       });
       router.push("/meet/success");
-    } catch (error: any) {
-      addNotification({ message: error, error: true });
+    } catch (error) {
+      addNotification({ message: error as string, error: true });
     } finally {
       setLoadingPayment(false);
     }
@@ -104,13 +108,13 @@ const CryptoPayment: React.FC<{ price?: number; type: string; meta: any }> = ({
         value={selectedCrypto?.name || ""}
         onChange={(e) => {
           const crypto = settings.cryptoInfo.find(
-            (c: any) => c.name === e.target.value
+            (c) => c.name === e.target.value
           );
           setSelectedCrypto(crypto || null);
         }}
       >
         <option value="">Select a cryptocurrency</option>
-        {settings.cryptoInfo.map((crypto: any) => (
+        {settings.cryptoInfo.map((crypto) => (
           <option key={crypto.name} value={crypto.name}>
             {crypto.name} ({crypto.network})
           </option>

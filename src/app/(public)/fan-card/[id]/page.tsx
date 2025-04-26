@@ -29,10 +29,10 @@ const FanCardForm: React.FC = () => {
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
-    const { name, value, files } = e.target as any;
+    const { name, value } = e.target;
     setForm((prev) => ({
       ...prev,
-      [name]: files ? files[0] : value,
+      [name]: value,
     }));
     setErrors((prev) => ({ ...prev, [name]: "" }));
   };
@@ -61,9 +61,9 @@ const FanCardForm: React.FC = () => {
           celebrityId: id as string,
         });
         router.push(`/payment?type=fanCard&id=${res._id}`);
-      } catch (error: any) {
+      } catch (error) {
         addNotification({
-          message: error,
+          message: error as string,
           error: true,
         });
       } finally {
@@ -89,7 +89,10 @@ const FanCardForm: React.FC = () => {
 
       addNotification({ message: "Image uploaded" });
     } catch (err) {
-      addNotification({ message: "Failed uploading image", error: true });
+      addNotification({
+        message: (err as string) || "Failed uploading image",
+        error: true,
+      });
     } finally {
       setUploading(false);
     }

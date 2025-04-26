@@ -36,7 +36,7 @@ export default function AdminChat() {
       const data = await getAdminConversations();
       setConversations(data);
     } catch (error) {
-      console.error("Failed to load conversations");
+      console.error("Failed to load conversations", error);
     }
   };
 
@@ -46,7 +46,7 @@ export default function AdminChat() {
       setMessages(data);
       setSelectedUser(userId);
     } catch (error) {
-      console.error("Failed to load messages");
+      console.error("Failed to load messages", error);
     }
   };
 
@@ -61,7 +61,7 @@ export default function AdminChat() {
       setMessages((prev) => [...prev, newMessage]);
       setMessage("");
     } catch (error) {
-      console.error("Failed to send message");
+      console.error("Failed to send message", error);
     }
   };
 

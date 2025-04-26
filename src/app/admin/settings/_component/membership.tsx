@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Loading from "../../../_components/loading";
 import { useToastNotification } from "@/contexts/toastNotification";
-import { getAllMemberships, updateMembership } from "@/services/membership";
+import { getAllMemberships } from "@/services/membership";
 import { IMembership } from "@/types/membership";
 import Image from "next/image";
 import Modal from "@/app/_components/modal";
@@ -23,8 +23,8 @@ const Membership = () => {
       setLoading(true);
       const res = await getAllMemberships();
       setMemberships(res);
-    } catch (error: any) {
-      addNotification({ message: error, error: true });
+    } catch (error) {
+      addNotification({ message: error as string, error: true });
     } finally {
       setLoading(false);
     }

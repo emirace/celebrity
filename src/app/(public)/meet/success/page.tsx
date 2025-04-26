@@ -31,8 +31,8 @@ export default function MeetAndGreetSuccessPage() {
           </h1>
           <p className="text-gray-600 text-sm md:text-base leading-relaxed">
             Your Request has been Submitted successful 🎉 <br />
-            Your request is currently <strong>pending approval</strong>. We'll
-            notify you once it's reviewed.
+            Your request is currently <strong>pending approval</strong>.
+            We`&apos;`ll notify you once it`&apos;`s reviewed.
           </p>
 
           <Link

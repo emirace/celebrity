@@ -1,5 +1,6 @@
 import Link from "next/link";
 import React from "react";
+import { FaFacebook, FaInstagram, FaTiktok, FaTwitter } from "react-icons/fa";
 
 const Footer = () => {
   return (
@@ -57,27 +58,27 @@ const Footer = () => {
             <div className="flex gap-4">
               {[
                 {
-                  icon: "FaInstagram",
-                  component: require("react-icons/fa").FaInstagram,
+                  icon: <FaInstagram className="w-5 h-5 text-black" />,
+                  key: "instagram",
                 },
                 {
-                  icon: "FaFacebook",
-                  component: require("react-icons/fa").FaFacebook,
+                  icon: <FaFacebook className="w-5 h-5 text-black" />,
+                  key: "facebook",
                 },
                 {
-                  icon: "FaTwitter",
-                  component: require("react-icons/fa").FaTwitter,
+                  icon: <FaTwitter className="w-5 h-5 text-black" />,
+                  key: "twitter",
                 },
                 {
-                  icon: "FaTiktok",
-                  component: require("react-icons/fa").FaTiktok,
+                  icon: <FaTiktok className="w-5 h-5 text-black" />,
+                  key: "tiktok",
                 },
-              ].map(({ component: Icon }, idx) => (
+              ].map(({ icon, key }) => (
                 <div
-                  key={idx}
+                  key={key}
                   className="w-9 h-9 bg-white rounded-full flex items-center justify-center"
                 >
-                  <Icon className="w-5 h-5 text-black" />
+                  {icon}
                 </div>
               ))}
             </div>

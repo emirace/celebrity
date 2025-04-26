@@ -21,6 +21,7 @@ const AllPayments: React.FC = () => {
   const itemsPerPage = 5;
   const [loading, setLoading] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [data, setData] = useState<any>(null);
 
   const loadPayments = async () => {
@@ -28,8 +29,8 @@ const AllPayments: React.FC = () => {
       setLoading(true);
       const res = await fetchAllPayments();
       setPayments(res);
-    } catch (error: any) {
-      addNotification({ message: error, error: true });
+    } catch (error) {
+      addNotification({ message: error as string, error: true });
     } finally {
       setLoading(false);
     }
@@ -52,8 +53,8 @@ const AllPayments: React.FC = () => {
     try {
       await deletePayment(id);
       loadPayments();
-    } catch (error: any) {
-      addNotification({ message: error, error: true });
+    } catch (error) {
+      addNotification({ message: error as string, error: true });
     }
   };
 
@@ -248,8 +249,8 @@ const UpdateButton = ({ id }: { id: string }) => {
       setShow(false);
       await updateStatus(id, status, reason);
       addNotification({ message: "Payment status updated" });
-    } catch (error: any) {
-      addNotification({ message: error, error: true });
+    } catch (error) {
+      addNotification({ message: error as string, error: true });
     } finally {
       setLoading(false);
     }

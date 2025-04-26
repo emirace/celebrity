@@ -7,14 +7,12 @@ import { auth } from "@/utils/auth";
 import connectDB from "@/utils/database";
 import { NextResponse } from "next/server";
 
-export const GET = auth(async function GET(
-  req: Request,
-  { params }: { params: { [id: string]: string } }
-) {
+export const GET = auth(async function GET(req: Request, { params }) {
   await connectDB();
 
+  const id = (await params).id;
   try {
-    const payment = await Payment.findById(params.id).populate("userId");
+    const payment = await Payment.findById(id).populate("userId");
 
     if (!payment) {
       return NextResponse.json(
@@ -33,14 +31,12 @@ export const GET = auth(async function GET(
   }
 });
 
-export const PUT = auth(async function PUT(
-  req: Request,
-  { params }: { params: { [id: string]: string } }
-) {
+export const PUT = auth(async function PUT(req: Request, { params }) {
   await connectDB();
 
+  const id = (await params).id;
   try {
-    const { status, reason } = await req.json();
+    const { status } = await req.json();
 
     if (!status) {
       return NextResponse.json(
@@ -50,7 +46,7 @@ export const PUT = auth(async function PUT(
     }
 
     const payment = await Payment.findByIdAndUpdate(
-      params.id,
+      id,
       { status },
       { new: true }
     ).populate("userId");
@@ -142,12 +138,6 @@ export const PUT = auth(async function PUT(
       }
     }
 
-    // Prepare email content
-    let text = "";
-    if (status === "successful") {
-      text = ``;
-    }
-
     // await sendEmail({
     //   to: payment.confirmEmail || payment.userId.email,
     //   subject: `Payment ${status}`,
@@ -164,10 +154,7 @@ export const PUT = auth(async function PUT(
   }
 });
 
-export const DELETE = auth(async function DELETE(
-  req,
-  { params }: { params: { [key: string]: string } }
-) {
+export const DELETE = auth(async function DELETE(req, { params }) {
   try {
     await connectDB();
     if (req.user.role !== "Admin") {
@@ -175,14 +162,16 @@ export const DELETE = auth(async function DELETE(
         status: 401,
       });
     }
-    const deleted = await Payment.findByIdAndDelete(params.id);
+
+    const id = (await params).id;
+    const deleted = await Payment.findByIdAndDelete(id);
     if (!deleted)
       return NextResponse.json(
         { message: "Payment not found" },
         { status: 404 }
       );
     return NextResponse.json({ message: "Payment deleted successfully" });
-  } catch (err: any) {
-    return NextResponse.json({ message: err.message }, { status: 500 });
+  } catch (err) {
+    return NextResponse.json({ message: err }, { status: 500 });
   }
 });

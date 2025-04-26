@@ -27,9 +27,11 @@ const BankingInfo = () => {
         setLoading(true);
 
         await fetchSettings();
-      } catch (error: any) {
+      } catch (error) {
         addNotification({
-          message: error || "An error occurred while updating your profile.",
+          message:
+            (error as string) ||
+            "An error occurred while updating your profile.",
           error: true,
         });
       } finally {
@@ -39,7 +41,7 @@ const BankingInfo = () => {
     loadSetting();
   }, []);
 
-  const handleChange = (e: { target: { name: any; value: any } }) => {
+  const handleChange = (e: { target: { name: string; value: string } }) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
@@ -60,9 +62,10 @@ const BankingInfo = () => {
       setLoading(true);
       await updateSettinngs({ ...settings, bankingInfo: formData });
       addNotification({ message: "Profile updated successfully!" });
-    } catch (error: any) {
+    } catch (error) {
       addNotification({
-        message: error || "An error occurred while updating your profile.",
+        message:
+          (error as string) || "An error occurred while updating your profile.",
         error: true,
       });
     } finally {

@@ -4,6 +4,7 @@ import Loading from "@/app/_components/loading";
 import { useToastNotification } from "@/contexts/toastNotification";
 import { useUser } from "@/contexts/user";
 import { loginUser } from "@/services/auth";
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
@@ -36,19 +37,24 @@ function Login() {
       });
       await getUser();
       router.push("/dashboard");
-    } catch (error: any) {
-      addNotification({ message: error || "An error occurred", error: true });
+    } catch (error) {
+      addNotification({
+        message: (error as string) || "An error occurred",
+        error: true,
+      });
     } finally {
       setLoading(false);
     }
   };
   return (
     <div className="flex relative flex-col lg:flex-row bg-white-color dark:bg-black-color h-screen">
-      <div className="flex-1 overflow-x-hidden">
-        <img
+      <div className="relative flex-1 overflow-x-hidden">
+        <Image
           src="/images/login.png"
           className="h-full w-full object-cover"
-          alt=""
+          alt="Login illustration"
+          fill
+          sizes="100vw"
         />
       </div>
       <div className="flex-[3] lg:flex-1 p-4 lg:p-8">

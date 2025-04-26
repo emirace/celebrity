@@ -2,7 +2,6 @@
 
 import Loading from "@/app/_components/loading";
 import { useEffect, useState } from "react";
-import { CiPhone } from "react-icons/ci";
 import BankTransfer from "./_component/bankTransfer";
 import Modal from "@/app/_components/modal";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -22,6 +21,7 @@ function Payment() {
   const { fetchFanCardById } = useFanCard();
 
   const [loading, setLoading] = useState(true);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [formData, setFormData] = useState<any>(null);
   const [error, setError] = useState("");
   const [isModalOpen, setModalOpen] = useState(false);
@@ -37,19 +37,19 @@ function Payment() {
           setError("");
           if (type === "meet") {
             const res = await getMeetById(id);
-            setFormData(res as any);
+            setFormData(res);
             setPrice(res?.celebrityId?.meetFee || 0);
           } else if (type === "membership") {
             const res = await getMembershipById(id);
-            setFormData(res as any);
+            setFormData(res);
             setPrice(res?.price || 0);
           } else if (type === "fanCard") {
             const res = await fetchFanCardById(id);
-            setFormData(res as any);
+            setFormData(res);
             setPrice(res?.celebrityId?.fanCardFee || 0);
           }
-        } catch (error: any) {
-          setError(error);
+        } catch (error) {
+          setError(error as string);
         } finally {
           setLoading(false);
         }

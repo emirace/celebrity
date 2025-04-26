@@ -23,7 +23,7 @@ const PersonalInfoForm = () => {
   const [loading, setLoading] = useState(false);
   const [uploading, setUploading] = useState(false);
 
-  const handleChange = (e: { target: { name: any; value: any } }) => {
+  const handleChange = (e: { target: { name: string; value: string } }) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
@@ -40,7 +40,7 @@ const PersonalInfoForm = () => {
       setLoading(true);
 
       // Prepare data for update
-      const updateData: Record<string, any> = {
+      const updateData: Record<string, string> = {
         fullName: formData.fullName,
         email: formData.email,
         username: formData.username,
@@ -56,9 +56,10 @@ const PersonalInfoForm = () => {
       await updateUser(updateData);
 
       addNotification({ message: "Profile updated successfully!" });
-    } catch (error: any) {
+    } catch (error) {
       addNotification({
-        message: error || "An error occurred while updating your profile.",
+        message:
+          (error as string) || "An error occurred while updating your profile.",
         error: true,
       });
     } finally {
@@ -79,7 +80,10 @@ const PersonalInfoForm = () => {
 
       addNotification({ message: "Image uploaded" });
     } catch (err) {
-      addNotification({ message: "Failed uploading image", error: true });
+      addNotification({
+        message: (err as string) || "Failed uploading image",
+        error: true,
+      });
     } finally {
       setUploading(false);
     }

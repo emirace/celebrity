@@ -27,7 +27,7 @@ export default function Chat() {
       const data = await getMessages();
       setMessages(data);
     } catch (error) {
-      console.error("Failed to load messages");
+      console.error(error);
     }
   };
 
@@ -42,7 +42,7 @@ export default function Chat() {
       setMessages((prev) => [...prev, newMessage]);
       setMessage("");
     } catch (error) {
-      console.error("Failed to send message");
+      console.error("Failed to send message", error);
     }
   };
 

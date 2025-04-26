@@ -56,7 +56,7 @@ export const PUT = auth(async function PUT(req) {
     if (!updated)
       return NextResponse.json({ message: "User not found" }, { status: 404 });
     return NextResponse.json(updated);
-  } catch (err: any) {
-    return NextResponse.json({ message: err.message }, { status: 500 });
+  } catch (err) {
+    return NextResponse.json({ message: err }, { status: 500 });
   }
 });

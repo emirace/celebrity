@@ -2,7 +2,6 @@
 
 import {
   createContext,
-  useCallback,
   useContext,
   useEffect,
   useState,
@@ -39,7 +38,7 @@ export const MeetProvider = ({ children }: { children: ReactNode }) => {
     try {
       const data = await getMeets();
       setMeets(data);
-    } catch (err: any) {
+    } catch (err) {
       throw err || "Failed to fetch meets";
     }
   };
@@ -75,8 +74,8 @@ export const MeetProvider = ({ children }: { children: ReactNode }) => {
       try {
         setLoading(true);
         await fetchMeets();
-      } catch (err: any) {
-        setError(err?.message || "Failed to fetch meets");
+      } catch (err) {
+        setError((err as string) || "Failed to fetch meets");
       } finally {
         setLoading(false);
       }

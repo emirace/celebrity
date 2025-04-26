@@ -1,10 +1,6 @@
 import { saveImageService } from "../services/image";
 
-export const compressImageUpload = async (
-  file: File,
-  maxSize: number,
-  image?: string
-) => {
+export const compressImageUpload = async (file: File, maxSize: number) => {
   // Create an HTMLImageElement to get the original dimensions of the image
 
   const img = new Image();
@@ -55,7 +51,6 @@ export const compressImageUpload = async (
   // Upload the resized image using axios
   const formData = new FormData();
   formData.append("image", file);
-  image && formData.append("deleteImage", image);
 
   try {
     const url = await saveImageService(formData);

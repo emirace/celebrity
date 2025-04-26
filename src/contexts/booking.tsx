@@ -2,7 +2,6 @@
 
 import {
   createContext,
-  useCallback,
   useContext,
   useEffect,
   useState,
@@ -39,7 +38,7 @@ export const BookingProvider = ({ children }: { children: ReactNode }) => {
     try {
       const data = await getBookings();
       setBookings(data);
-    } catch (err: any) {
+    } catch (err) {
       throw err || "Failed to fetch bookings";
     }
   };
@@ -74,8 +73,8 @@ export const BookingProvider = ({ children }: { children: ReactNode }) => {
       try {
         setLoading(true);
         await fetchBookings();
-      } catch (err: any) {
-        setError(err?.message || "Failed to fetch bookings");
+      } catch (err) {
+        setError((err as string) || "Failed to fetch bookings");
       } finally {
         setLoading(false);
       }

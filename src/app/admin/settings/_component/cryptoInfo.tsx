@@ -29,9 +29,11 @@ const CryptoInfo = () => {
         setLoading(true);
 
         await fetchSettings();
-      } catch (error: any) {
+      } catch (error) {
         addNotification({
-          message: error || "An error occurred while updating your profile.",
+          message:
+            (error as string) ||
+            "An error occurred while updating your profile.",
           error: true,
         });
       } finally {
@@ -78,9 +80,10 @@ const CryptoInfo = () => {
       setLoading(true);
       await updateSettinngs({ ...settings, cryptoInfo: formData });
       addNotification({ message: "Profile updated successfully!" });
-    } catch (error: any) {
+    } catch (error) {
       addNotification({
-        message: error || "An error occurred while updating your profile.",
+        message:
+          (error as string) || "An error occurred while updating your profile.",
         error: true,
       });
     } finally {

@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import { FaInstagram, FaYoutube, FaTiktok, FaFacebook } from "react-icons/fa";
-import { BsStarFill } from "react-icons/bs";
 import Link from "next/link";
 
 const Hero = () => {

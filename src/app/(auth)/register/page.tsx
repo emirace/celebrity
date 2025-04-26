@@ -1,10 +1,11 @@
 "use client";
 
 import { useToastNotification } from "@/contexts/toastNotification";
-import { loginUser, registerUser } from "@/services/auth";
+import { registerUser } from "@/services/auth";
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { FormEvent, use, useState } from "react";
+import { FormEvent, useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 function Login() {
@@ -26,17 +27,22 @@ function Login() {
         password,
       });
       router.push("/login");
-    } catch (error: any) {
-      addNotification({ message: error || "An error occurred", error: true });
+    } catch (error) {
+      addNotification({
+        message: (error as string) || "An error occurred",
+        error: true,
+      });
     }
   };
   return (
     <div className="flex relative flex-col lg:flex-row bg-white-color dark:bg-black-color h-screen">
-      <div className="flex-1 overflow-x-hidden">
-        <img
+      <div className="relative flex-1 overflow-x-hidden">
+        <Image
           src="/images/signup.png"
           className="h-full w-full object-cover"
-          alt=""
+          alt="Login illustration"
+          fill
+          sizes="100vw"
         />
       </div>
       <div className="flex-[3] lg:flex-1 p-4 lg:p-8">

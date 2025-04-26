@@ -9,7 +9,7 @@ const ConnectWithCeleb = () => {
       {/* Left Image */}
       <div className="w-40 h-40 relative rotate-[-10deg] shadow-lg rounded-2xl overflow-hidden">
         <Image
-          src="/images/fan-party.jpg"
+          src="/images/connect.webp"
           alt="Kids Party"
           fill
           style={{ objectFit: "cover" }}
@@ -38,7 +38,7 @@ const ConnectWithCeleb = () => {
       {/* Right Image */}
       <div className="w-40 h-40 relative rotate-[10deg] shadow-lg rounded-2xl overflow-hidden">
         <Image
-          src="/images/selfcare.jpg"
+          src="/images/connect2.webp"
           alt="Skincare"
           fill
           style={{ objectFit: "cover" }}

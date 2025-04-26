@@ -58,7 +58,7 @@ const CelebrityForm: React.FC<CelebrityFormProps> = ({
   }, [celebrity]);
 
   const validateForm = () => {
-    let newErrors: Record<string, string> = {};
+    const newErrors: Record<string, string> = {};
     if (!formData.fullName) newErrors.fullName = "Full name is required";
     if (!formData.job) newErrors.job = "Profession is required";
     if (!formData.age || formData.age <= 0)
@@ -96,8 +96,8 @@ const CelebrityForm: React.FC<CelebrityFormProps> = ({
       loadCelebrities();
       onClose();
       addNotification({ message: "Celebrity saved successfully" });
-    } catch (error: any) {
-      addNotification({ message: error.message || error, error: true });
+    } catch (error) {
+      addNotification({ message: error as string, error: true });
     } finally {
       setLoading(false);
     }
@@ -116,7 +116,10 @@ const CelebrityForm: React.FC<CelebrityFormProps> = ({
 
       addNotification({ message: "Image uploaded" });
     } catch (err) {
-      addNotification({ message: "Failed uploading image", error: true });
+      addNotification({
+        message: (err as string) || "Failed uploading image",
+        error: true,
+      });
     } finally {
       setUploading(false);
     }

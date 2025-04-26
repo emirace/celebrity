@@ -24,8 +24,8 @@ const Payments: React.FC = () => {
         setLoading(true);
         const res = await fetchUserPayments();
         setPayments(res);
-      } catch (error: any) {
-        addNotification({ message: error, error: true });
+      } catch (error) {
+        addNotification({ message: error as string, error: true });
       } finally {
         setLoading(false);
       }

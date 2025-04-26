@@ -16,7 +16,7 @@ const BankTransfer = ({
 }: {
   close: () => void;
   amount: number;
-  meta: any;
+  meta: object;
   type: string;
 }) => {
   const { addNotification } = useToastNotification();
@@ -42,9 +42,11 @@ const BankTransfer = ({
       try {
         setLoading(true);
         await fetchSettings();
-      } catch (error: any) {
+      } catch (error) {
         addNotification({
-          message: error || "An error occurred while updating your profile.",
+          message:
+            (error as string) ||
+            "An error occurred while updating your profile.",
           error: true,
         });
       } finally {
@@ -86,9 +88,9 @@ const BankTransfer = ({
 
       addNotification({ message: "Deposit made successfully" });
       router.push("/meet/success");
-    } catch (error: any) {
+    } catch (error) {
       addNotification({
-        message: error,
+        message: error as string,
         error: true,
       });
     } finally {
@@ -109,7 +111,10 @@ const BankTransfer = ({
 
       addNotification({ message: "Image uploaded" });
     } catch (err) {
-      addNotification({ message: "Failed uploading image", error: true });
+      addNotification({
+        message: (err as string) || "Failed uploading image",
+        error: true,
+      });
     } finally {
       setUploading(false);
     }
@@ -123,10 +128,10 @@ const BankTransfer = ({
     <div className="rounded-lg p-6 w-full">
       {/* Header */}
       <div className="flex items-center justify-between mb-4">
-        <img src={""} alt="logo" className="h-10" />
-        <div className="text-right">
-          <p className="text-lg font-bold">${amount}</p>
+        <div className="w-8 h-8 bg-black rounded-full flex items-center justify-center">
+          <span className="text-white font-bold text-xs">⭘</span>
         </div>
+        <span className="font-semibold text-lg text-gray-900">M-Fanstar</span>
       </div>
 
       {/* Title */}

@@ -10,6 +10,7 @@ import {
   FaLinkedin,
 } from "react-icons/fa";
 import Chat from "./_component/chat";
+import Image from "next/image";
 
 const Contact = () => {
   const { settings } = useSetting();
@@ -96,10 +97,12 @@ const Contact = () => {
       <section className=" py-12 flex flex-col md:flex-row items-center gap-10 mb-16">
         {/* Left Image */}
         <div className="flex-1">
-          <img
-            src={"/images/support.avif"}
+          <Image
+            src="/images/support.avif"
             alt="Traveler"
-            className="w-full  mx-auto"
+            className="w-full mx-auto"
+            width={500}
+            height={500}
           />
         </div>
 

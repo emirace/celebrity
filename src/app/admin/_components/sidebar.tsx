@@ -4,14 +4,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import {
-  FiBarChart2,
-  FiShoppingCart,
-  FiTruck,
   FiUsers,
-  FiTag,
-  FiBook,
   FiSettings,
-  FiMoon,
   FiChevronLeft,
   FiChevronRight,
   FiLogOut,

@@ -11,8 +11,6 @@ import {
 import { useMeet } from "@/contexts/meet";
 import { useToastNotification } from "@/contexts/toastNotification";
 import Loading from "@/app/_components/loading";
-import { LuHandshake } from "react-icons/lu";
-import moment from "moment";
 import Image from "next/image";
 
 const tabItems = [
@@ -51,8 +49,8 @@ function Meet() {
       try {
         setLoading(true);
         await fetchMeets();
-      } catch (error: any) {
-        addNotification({ message: error, error: true });
+      } catch (error) {
+        addNotification({ message: error as string, error: true });
       } finally {
         setLoading(false);
       }

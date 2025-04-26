@@ -7,12 +7,12 @@ const secret = process.env.JWT_SECRET!;
 export function auth(
   handler: (
     req: NextRequest & { user?: any },
-    ctx: { params: { [key: string]: string } }
+    ctx: { params: Promise<{ id: string }> }
   ) => Promise<Response> | Response
 ) {
   return async function (
     req: NextRequest,
-    ctx: { params: { [key: string]: string } }
+    ctx: { params: Promise<{ id: string }> }
   ) {
     try {
       const authHeader = req.headers.get("authorization");

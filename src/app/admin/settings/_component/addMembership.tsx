@@ -44,7 +44,10 @@ function AddMembership({
 
       addNotification({ message: "Image uploaded" });
     } catch (err) {
-      addNotification({ message: "Failed uploading image", error: true });
+      addNotification({
+        message: (err as string) || "Failed uploading image",
+        error: true,
+      });
     } finally {
       setUploading(false);
     }
@@ -68,9 +71,10 @@ function AddMembership({
       }
       addNotification({ message: "Membership created successfully!" });
       close();
-    } catch (error: any) {
+    } catch (error) {
       addNotification({
-        message: error || "An error occurred while creating your profile.",
+        message:
+          (error as string) || "An error occurred while creating your profile.",
         error: true,
       });
     } finally {
@@ -97,7 +101,7 @@ function AddMembership({
         ) : (
           <>
             <FiImage size={80} />
-            <Loading size={20} />
+            {uploading && <Loading size={20} />}
           </>
         )}
         <input

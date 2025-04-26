@@ -20,8 +20,8 @@ export const POST = auth(async function POST(req) {
       fanId,
     });
     return NextResponse.json(fanCard, { status: 201 });
-  } catch (err: any) {
-    return NextResponse.json({ message: err.message }, { status: 500 });
+  } catch (err) {
+    return NextResponse.json({ message: err }, { status: 500 });
   }
 });
 
@@ -33,7 +33,7 @@ export const GET = auth(async function GET(req) {
       select: "username image fullName job",
     });
     return NextResponse.json(fanCards);
-  } catch (err: any) {
-    return NextResponse.json({ message: err.message }, { status: 500 });
+  } catch (err) {
+    return NextResponse.json({ message: err }, { status: 500 });
   }
 });

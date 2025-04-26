@@ -1,7 +1,7 @@
 import Membership from "@/models/membership";
 import { auth } from "@/utils/auth";
 import connectDB from "@/utils/database";
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 
 // GET all memberships
 export async function GET() {

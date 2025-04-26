@@ -5,26 +5,25 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(
   _: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     await connectDB();
-    const meet = await Meet.findById(params.id).populate({
+
+    const id = (await params).id;
+    const meet = await Meet.findById(id).populate({
       path: "celebrityId",
       select: "image job fullName",
     });
     if (!meet)
       return NextResponse.json({ message: "Meet not found" }, { status: 404 });
     return NextResponse.json(meet);
-  } catch (err: any) {
-    return NextResponse.json({ message: err.message }, { status: 500 });
+  } catch (err) {
+    return NextResponse.json({ message: err }, { status: 500 });
   }
 }
 
-export const PUT = auth(async function PUT(
-  req,
-  { params }: { params: { [key: string]: string } }
-) {
+export const PUT = auth(async function PUT(req, { params }) {
   try {
     await connectDB();
 
@@ -35,21 +34,20 @@ export const PUT = auth(async function PUT(
     }
 
     const data = await req.json();
-    const updated = await Meet.findByIdAndUpdate(params.id, data, {
+
+    const id = (await params).id;
+    const updated = await Meet.findByIdAndUpdate(id, data, {
       new: true,
     });
     if (!updated)
       return NextResponse.json({ message: "Meet not found" }, { status: 404 });
     return NextResponse.json(updated);
-  } catch (err: any) {
-    return NextResponse.json({ message: err.message }, { status: 500 });
+  } catch (err) {
+    return NextResponse.json({ message: err }, { status: 500 });
   }
 });
 
-export const DELETE = auth(async function DELETE(
-  req,
-  { params }: { params: { [key: string]: string } }
-) {
+export const DELETE = auth(async function DELETE(req, { params }) {
   try {
     await connectDB();
     if (req.user.role !== "Admin") {
@@ -57,11 +55,13 @@ export const DELETE = auth(async function DELETE(
         status: 401,
       });
     }
-    const deleted = await Meet.findByIdAndDelete(params.id);
+
+    const id = (await params).id;
+    const deleted = await Meet.findByIdAndDelete(id);
     if (!deleted)
       return NextResponse.json({ message: "Meet not found" }, { status: 404 });
     return NextResponse.json({ message: "Meet deleted successfully" });
-  } catch (err: any) {
-    return NextResponse.json({ message: err.message }, { status: 500 });
+  } catch (err) {
+    return NextResponse.json({ message: err }, { status: 500 });
   }
 });

@@ -2,7 +2,7 @@
 
 import Modal from "@/app/_components/modal";
 import Image from "next/image";
-import React, { use, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FiEdit, FiSearch, FiTrash2 } from "react-icons/fi";
 import CelebrityForm from "./_components/celebrityForm";
 import { IUser } from "@/types/user";
@@ -20,17 +20,17 @@ function Celebrities() {
   );
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [page, setPage] = useState(1);
+  const [page] = useState(1);
 
   const loadCelebrities = async () => {
     try {
       setLoading(true);
       const res = await fetchCelebrities({ search, page });
       setCelebrities(res.celebrities);
-    } catch (error: any) {
+    } catch (error) {
       console.error("Error fetching celebrities:", error);
       addNotification({
-        message: error,
+        message: error as string,
         error: true,
       });
     } finally {
@@ -57,9 +57,9 @@ function Celebrities() {
         message: "Celebrity deleted successfully",
         error: false,
       });
-    } catch (error: any) {
+    } catch (error) {
       addNotification({
-        message: error,
+        message: error as string,
         error: true,
       });
     }
@@ -98,7 +98,10 @@ function Celebrities() {
             <div className="">No Celebrity Available</div>
           ) : (
             celebrities.map((celebrity) => (
-              <div className="relative rounded-xl border border-gray-300 mb-4 overflow-hidden transition-shadow duration-300 flex flex-col sm:flex-row">
+              <div
+                key={celebrity._id}
+                className="relative rounded-xl border border-gray-300 mb-4 overflow-hidden transition-shadow duration-300 flex flex-col sm:flex-row"
+              >
                 {/* Top Right Icons */}
                 <div className="absolute top-4 right-4 flex gap-2 z-10">
                   <button

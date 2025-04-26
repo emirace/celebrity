@@ -7,18 +7,11 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import {
   FiBarChart2,
-  FiShoppingCart,
-  FiTruck,
-  FiUsers,
-  FiTag,
-  FiBook,
   FiSettings,
-  FiMoon,
   FiChevronLeft,
   FiChevronRight,
   FiLogOut,
   FiBookmark,
-  FiUser,
   FiDollarSign,
   FiArrowRight,
 } from "react-icons/fi";
@@ -55,7 +48,7 @@ const menuItems = [
 ];
 
 export default function Sidebar() {
-  const { user } = useUser();
+  const { user, logout } = useUser();
   const [collapsed, setCollapsed] = useState(false);
   const pathname = usePathname();
 
@@ -82,7 +75,7 @@ export default function Sidebar() {
               <span className="text-white font-bold text-xs">⭘</span>
             </div>
             {!collapsed && (
-              <span className="font-semibold text-lg text-gray-900">
+              <span className="font-semibold text-lg text-gray-900 whitespace-nowrap">
                 M-Fanstar
               </span>
             )}
@@ -178,6 +171,7 @@ export default function Sidebar() {
           className={`flex items-center space-x-3 px-3 py-3 rounded-md transition-all hover:bg-red-50 text-gray-800 cursor-pointer
                     ${collapsed ? "justify-center" : "justify-start"}
                     `}
+          onClick={logout}
         >
           <FiLogOut size={20} />
           {!collapsed && <span>Log Out</span>}

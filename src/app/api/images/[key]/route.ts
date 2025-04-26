@@ -16,7 +16,7 @@ const s3 = new S3Client({
 
 export async function GET(
   req: NextRequest,
-  { params }: { params: { key: string } }
+  { params }: { params: Promise<{ key: string }> }
 ) {
   const { key } = await params;
   console.log("key", key);

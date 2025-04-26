@@ -26,9 +26,9 @@ export const PUT = auth(async function PUT(req) {
 
     const { fullName, image, username, password } = await req.json();
     const data: {
-      fullName: any;
-      image: any;
-      username: any;
+      fullName: string;
+      image: string;
+      username: string;
       password?: string;
     } = {
       fullName,
@@ -48,7 +48,7 @@ export const PUT = auth(async function PUT(req) {
       return NextResponse.json({ message: "User not found" }, { status: 404 });
 
     return NextResponse.json(updated);
-  } catch (err: any) {
-    return NextResponse.json({ message: err.message }, { status: 500 });
+  } catch (err) {
+    return NextResponse.json({ message: err }, { status: 500 });
   }
 });

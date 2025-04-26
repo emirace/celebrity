@@ -3,8 +3,8 @@ import mongoose from "mongoose";
 const DATABASE_URL = process.env.MONGODB_URL || "";
 
 declare global {
-  /* eslint no-var: 0 */
-  var mongoose: any; // This must be a `var` and not a `let / const`
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any, no-var
+  var mongoose: any;
 }
 
 if (!DATABASE_URL) {

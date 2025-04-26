@@ -1,6 +1,6 @@
 import { FC } from "react";
 import Image from "next/image";
-import { FaUser, FaMapMarkerAlt, FaClock } from "react-icons/fa";
+import { FaClock } from "react-icons/fa";
 import { MdEmail, MdOutlineMobileFriendly } from "react-icons/md";
 
 type CommonTypes = {
@@ -44,11 +44,11 @@ type MembershipType = {
   price?: string;
 } & CommonTypes;
 
-type Props = {
+export type IDetailProps = {
   data: MeetType | BookingType | FanCardType | MembershipType;
 };
 
-const Detail: FC<Props> = ({ data }) => {
+const Detail: FC<IDetailProps> = ({ data }) => {
   const statusColors = {
     Pending: "bg-yellow-100 text-yellow-700",
     Confirmed: "bg-green-100 text-green-700",
@@ -62,7 +62,7 @@ const Detail: FC<Props> = ({ data }) => {
       <div className="flex items-center justify-between gap-4 p-4 border-b">
         <div className="flex items-center gap-4">
           <Image
-            src={data?.celebrityId?.image || (data as any).image}
+            src={data?.celebrityId?.image || (data as { image: string }).image}
             alt="Celebrity"
             className="object-cover h-16 w-16 rounded-full ring-2 ring-blue-100"
             width={64}
@@ -70,7 +70,7 @@ const Detail: FC<Props> = ({ data }) => {
           />
           <div>
             <p className="text-lg font-semibold capitalize text-gray-800">
-              {data?.celebrityId?.fullName || (data as any).name}
+              {data?.celebrityId?.fullName || (data as { name: string }).name}
             </p>
             <p className="text-sm text-gray-500 capitalize">
               {data?.celebrityId?.job?.join(", ")}

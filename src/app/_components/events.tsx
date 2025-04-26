@@ -44,7 +44,7 @@ const Events = () => {
         </button>
       </div>
       <p className="text-sm text-gray-500 mb-10">
-        * We Never Use Any Email For Sales, It's Private
+        * We Never Use Any Email For Sales, It`&apos;`s Private
       </p>
 
       {/* Card Slider Section */}

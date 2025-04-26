@@ -92,7 +92,7 @@ export const POST = auth(async function POST(request) {
       fanCardFee,
     });
     return NextResponse.json(user, { status: 201 });
-  } catch (err: any) {
+  } catch (err) {
     console.log(err);
     return new NextResponse("Internal Server Error", {
       status: 500,

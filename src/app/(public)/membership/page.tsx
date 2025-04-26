@@ -9,21 +9,6 @@ import { IMembership } from "@/types/membership";
 import Loading from "@/app/_components/loading";
 import { useRouter } from "next/navigation";
 
-const cards = [
-  {
-    title: "Silver Elite",
-    image: "/images/silver.jpeg",
-  },
-  {
-    title: "Gold Elite",
-    image: "/images/gold.png",
-  },
-  {
-    title: "VIP Elite",
-    image: "/images/vip.webp",
-  },
-];
-
 const Membership = () => {
   const { addNotification } = useToastNotification();
   const [loading, setLoading] = useState(true);
@@ -35,8 +20,8 @@ const Membership = () => {
       setLoading(true);
       const res = await getAllMemberships();
       setMembership(res);
-    } catch (error: any) {
-      addNotification({ message: error, error: true });
+    } catch (error) {
+      addNotification({ message: error as string, error: true });
     } finally {
       setLoading(false);
     }

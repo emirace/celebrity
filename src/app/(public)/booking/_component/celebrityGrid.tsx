@@ -13,17 +13,17 @@ const CelebrityGrid = () => {
   const [search, setSearch] = useState("");
   const [celebrities, setCelebrities] = useState<IUser[]>([]);
   const [loading, setLoading] = useState(true);
-  const [page, setPage] = useState(1);
+  const [page] = useState(1);
 
   const loadCelebrities = async () => {
     try {
       setLoading(true);
       const res = await userFetchCelebrities({ search, page });
       setCelebrities(res.celebrities);
-    } catch (error: any) {
+    } catch (error) {
       console.error("Error fetching celebrities:", error);
       addNotification({
-        message: error,
+        message: error as string,
         error: true,
       });
     } finally {

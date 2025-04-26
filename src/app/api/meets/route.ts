@@ -47,8 +47,8 @@ export const POST = auth(async function POST(req) {
       passport: data.passport,
     });
     return NextResponse.json(meet, { status: 201 });
-  } catch (err: any) {
-    return NextResponse.json({ message: err.message }, { status: 500 });
+  } catch (err) {
+    return NextResponse.json({ message: err }, { status: 500 });
   }
 });
 
@@ -60,7 +60,7 @@ export const GET = auth(async function GET(req) {
       select: "username image fullName job",
     });
     return NextResponse.json(meets);
-  } catch (err: any) {
-    return NextResponse.json({ message: err.message }, { status: 500 });
+  } catch (err) {
+    return NextResponse.json({ message: err }, { status: 500 });
   }
 });

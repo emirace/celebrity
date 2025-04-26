@@ -1,9 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { FiCheckCircle, FiClock, FiSearch, FiShield } from "react-icons/fi";
+import { FiClock, FiSearch, FiShield } from "react-icons/fi";
 import Meetings from "./_components/meetings";
-import Booking from "./_components/bookings";
 import { useUser } from "@/contexts/user";
 
 const Dashboard = () => {

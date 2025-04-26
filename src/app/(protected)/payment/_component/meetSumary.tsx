@@ -1,5 +1,3 @@
-import { FaUser, FaTicketAlt } from "react-icons/fa";
-import moment from "moment";
 import { IMeet } from "@/types/meet";
 import { FiBox, FiUser } from "react-icons/fi";
 import Image from "next/image";

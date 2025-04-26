@@ -1,7 +1,7 @@
 import Setting from "@/models/setting";
 import { auth } from "@/utils/auth";
 import connectDB from "@/utils/database";
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 
 // GET handler — fetch settings or create default
 export async function GET() {
@@ -40,7 +40,7 @@ export async function GET() {
     }
 
     return NextResponse.json(settings);
-  } catch (error: any) {
+  } catch (error) {
     console.error("GET settings error:", error);
     return NextResponse.json(
       { message: "Internal Server Error" },
@@ -76,7 +76,7 @@ export const PUT = auth(async function PUT(req) {
     );
 
     return NextResponse.json(updatedSettings);
-  } catch (error: any) {
+  } catch (error) {
     console.error("PUT settings error:", error);
     return NextResponse.json(
       { message: "Internal Server Error" },

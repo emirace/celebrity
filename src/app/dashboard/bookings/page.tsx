@@ -50,8 +50,8 @@ function Booking() {
       try {
         setLoading(true);
         await fetchBookings();
-      } catch (error: any) {
-        addNotification({ message: error, error: true });
+      } catch (error) {
+        addNotification({ message: error as string, error: true });
       } finally {
         setLoading(false);
       }

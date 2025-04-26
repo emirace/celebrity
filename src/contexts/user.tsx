@@ -31,7 +31,7 @@ export const UserProvider = ({ children }: UserProviderProps) => {
       const data = await getUserProfile();
       console.log("User data:", data);
       setUser(data);
-    } catch (err: any) {
+    } catch (err) {
       throw err;
     }
   };
@@ -40,7 +40,7 @@ export const UserProvider = ({ children }: UserProviderProps) => {
     try {
       const updatedUser = await updateUserProfile(profileData);
       setUser(updatedUser);
-    } catch (err: any) {
+    } catch (err) {
       throw err;
     }
   };

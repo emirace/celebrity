@@ -19,6 +19,7 @@ import {
   FiUser,
   FiDollarSign,
   FiArrowRight,
+  FiMessageCircle,
 } from "react-icons/fi";
 import { LuHandshake } from "react-icons/lu";
 import { MdCardGiftcard } from "react-icons/md";
@@ -49,6 +50,11 @@ const menuItems = [
     name: "Payments",
     path: "/admin/transactions",
     icon: <FiDollarSign size={20} />,
+  },
+  {
+    name: "Support",
+    path: "/admin/support",
+    icon: <FiMessageCircle size={20} />,
   },
   {
     name: "Settings",
@@ -85,7 +91,7 @@ export default function Sidebar() {
             </div>
             {!collapsed && (
               <span className="font-semibold text-lg text-gray-900">
-                FanStar
+                M-Fanstar
               </span>
             )}
           </Link>

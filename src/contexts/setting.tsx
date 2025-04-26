@@ -1,6 +1,12 @@
 "use client";
 
-import React, { createContext, useState, ReactNode, useContext } from "react";
+import React, {
+  createContext,
+  useState,
+  ReactNode,
+  useContext,
+  useEffect,
+} from "react";
 import {
   fetchSettingsService,
   updateSettingsService,
@@ -66,6 +72,10 @@ export const SettingProvider: React.FC<Props> = ({ children }) => {
       throw error;
     }
   };
+
+  useEffect(() => {
+    fetchSettings();
+  }, []);
 
   return (
     <SettingContext.Provider

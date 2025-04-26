@@ -83,7 +83,7 @@ export default function Sidebar() {
             </div>
             {!collapsed && (
               <span className="font-semibold text-lg text-gray-900">
-                FanStar
+                M-Fanstar
               </span>
             )}
           </Link>

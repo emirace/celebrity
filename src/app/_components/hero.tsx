@@ -37,8 +37,8 @@ const Hero = () => {
           </h1>
 
           <p className="mt-6 md:w-3/5 text-gray-500 text-lg">
-            At FanStar, we bring your favorite artists closer to you and we make
-            it possible.
+            At M-Fanstar, we bring your favorite artists closer to you and we
+            make it possible.
           </p>
 
           {/* CTA Buttons */}

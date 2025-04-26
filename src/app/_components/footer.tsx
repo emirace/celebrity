@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 const Footer = () => {
@@ -36,12 +37,12 @@ const Footer = () => {
               placeholder="Your Artist Agency"
               className="px-4 py-2 border rounded-md"
             />
-            <button
-              type="submit"
-              className="bg-black text-white py-2 rounded-md font-medium hover:bg-gray-800"
+            <Link
+              href="/register"
+              className="bg-black text-white py-2 text-center rounded-md font-medium hover:bg-gray-800"
             >
               Join Now
-            </button>
+            </Link>
           </form>
         </div>
 
@@ -54,20 +55,31 @@ const Footer = () => {
               special promotions, and more.
             </p>
             <div className="flex gap-4">
-              {["instagram", "facebook", "twitter", "tiktok"].map(
-                (icon, idx) => (
-                  <div
-                    key={idx}
-                    className="w-9 h-9 bg-white rounded-full flex items-center justify-center"
-                  >
-                    <img
-                      src={`/icons/${icon}.svg`}
-                      alt={icon}
-                      className="w-5 h-5"
-                    />
-                  </div>
-                )
-              )}
+              {[
+                {
+                  icon: "FaInstagram",
+                  component: require("react-icons/fa").FaInstagram,
+                },
+                {
+                  icon: "FaFacebook",
+                  component: require("react-icons/fa").FaFacebook,
+                },
+                {
+                  icon: "FaTwitter",
+                  component: require("react-icons/fa").FaTwitter,
+                },
+                {
+                  icon: "FaTiktok",
+                  component: require("react-icons/fa").FaTiktok,
+                },
+              ].map(({ component: Icon }, idx) => (
+                <div
+                  key={idx}
+                  className="w-9 h-9 bg-white rounded-full flex items-center justify-center"
+                >
+                  <Icon className="w-5 h-5 text-black" />
+                </div>
+              ))}
             </div>
           </div>
 
@@ -75,17 +87,41 @@ const Footer = () => {
             <div>
               <h4 className="font-semibold text-white mb-2">Navigation</h4>
               <ul>
-                <li>Services</li>
-                <li>Pricing</li>
-                <li>About</li>
+                <li>
+                  <Link href="/services" className="hover:underline">
+                    Services
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/meet" className="hover:underline">
+                    Meet & Greet
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/contact" className="hover:underline">
+                    Contact
+                  </Link>
+                </li>
               </ul>
             </div>
             <div>
-              <h4 className="font-semibold text-white mb-2">Tutorial</h4>
+              <h4 className="font-semibold text-white mb-2">Use Link</h4>
               <ul>
-                <li>Become A Contributor</li>
-                <li>Made Video</li>
-                <li>Make Endorsement</li>
+                <li>
+                  <Link href="/membership" className="hover:underline">
+                    Membership
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/fan-card" className="hover:underline">
+                    Fan Card
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/booking" className="hover:underline">
+                    Booking
+                  </Link>
+                </li>
               </ul>
             </div>
             <div>
@@ -101,7 +137,7 @@ const Footer = () => {
             <div>
               <h4 className="font-semibold text-white mb-2">Contact</h4>
               <p>
-                Hello@fanstar.com
+                Hello@M-Fanstar.com
                 <br />
                 +32 (2) 322 918 9484
               </p>
@@ -112,7 +148,7 @@ const Footer = () => {
 
       {/* Footer Bottom */}
       <div className="relative z-10 text-gray-400 text-xs text-center mt-8 pb-4">
-        <p>© 2024 Fanstar. All Right Reserved.</p>
+        <p>© 2024 M-Fanstar. All Right Reserved.</p>
         <div className="flex justify-center gap-6 mt-2">
           <span>Terms</span>
           <span>Privacy</span>

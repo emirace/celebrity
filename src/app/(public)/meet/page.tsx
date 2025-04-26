@@ -7,7 +7,7 @@ function Meet() {
     <div>
       <Header
         title=" Meet and Greet"
-        subtitle="At FanStar, we bring your favorite artists closer to you and we make it
+        subtitle="At M-Fanstar, we bring your favorite artists closer to you and we make it
               possible."
       />
       <CelebrityGrid />

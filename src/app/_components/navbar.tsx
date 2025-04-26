@@ -21,7 +21,7 @@ const Navbar = () => {
           <div className="w-8 h-8 bg-black rounded-full flex items-center justify-center">
             <span className="text-white font-bold text-xs">⭘</span>
           </div>
-          <span className="font-semibold text-lg text-gray-900">FanStar</span>
+          <span className="font-semibold text-lg text-gray-900">M-Fanstar</span>
         </Link>
 
         {/* Navigation Links */}

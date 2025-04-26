@@ -13,7 +13,7 @@ export async function GET(
     const id = (await params).id;
     const meet = await Meet.findById(id).populate({
       path: "celebrityId",
-      select: "image job fullName",
+      select: "image job fullName meetFee",
     });
     if (!meet)
       return NextResponse.json({ message: "Meet not found" }, { status: 404 });

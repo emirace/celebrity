@@ -1,9 +1,10 @@
 "use client";
 
 import Image from "next/image";
-import { FiClock, FiSearch, FiShield } from "react-icons/fi";
+import { FiArrowRight, FiClock, FiSearch, FiShield } from "react-icons/fi";
 import Meetings from "./_components/meetings";
 import { useUser } from "@/contexts/user";
+import Link from "next/link";
 
 const Dashboard = () => {
   const { user } = useUser();
@@ -82,18 +83,31 @@ const Dashboard = () => {
                     <FiClock className="w-5 h-5 text-gray-700" />
                   </div>
 
-                  <div>
-                    <div className="relative w-full h-36 mb-4">
-                      <Image
-                        src={"/images/silver.jpeg"}
-                        alt={"member"}
-                        layout="fill"
-                        objectFit="contain"
-                        className="rounded-lg"
-                      />
+                  {user?.membership?.name ? (
+                    <div>
+                      <div className="relative w-full h-36 mb-4">
+                        <Image
+                          src={user.membership.image}
+                          alt={"member"}
+                          layout="fill"
+                          objectFit="contain"
+                          className="rounded-lg"
+                        />
+                      </div>
+                      <div className="text-center">{user.membership.name}</div>
                     </div>
-                    <div className="text-center">Silver Elite</div>
-                  </div>
+                  ) : (
+                    <div>
+                      <div>No Membership Status</div>
+                      <Link
+                        href={"/membership"}
+                        className="flex items-center gap-2"
+                      >
+                        Apply
+                        <FiArrowRight />
+                      </Link>
+                    </div>
+                  )}
                 </div>
 
                 {/* Additional Tasks */}

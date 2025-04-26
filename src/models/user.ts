@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { Schema } from "mongoose";
 
 const UserSchema = new mongoose.Schema({
   fullName: { type: String },
@@ -17,7 +18,7 @@ const UserSchema = new mongoose.Schema({
   meetFee: { type: Number },
   bookingFee: { type: Number },
   fanCardFee: { type: Number },
-  membership: { type: String, default: null },
+  membership: { type: Schema.Types.ObjectId, ref: "Membership" },
   security: { type: Boolean, default: false },
 });
 

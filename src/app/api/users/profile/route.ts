@@ -6,7 +6,9 @@ import { NextResponse } from "next/server";
 
 export const GET = auth(async function GET(request) {
   await connectDB();
-  const user = await User.findById(request.user!._id).select("-password");
+  const user = await User.findById(request.user!._id)
+    .select("-password")
+    .populate("membership");
 
   if (!user) {
     return new NextResponse("User not found", {

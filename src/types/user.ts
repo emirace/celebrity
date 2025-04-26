@@ -1,3 +1,5 @@
+import { IMembership } from "./membership";
+
 export interface IUser {
   _id: string;
   createdAt: string;
@@ -17,7 +19,7 @@ export interface IUser {
   meetFee?: number;
   bookingFee?: number;
   fanCardFee?: number;
-  membership: string;
+  membership: IMembership;
   security: boolean;
 }
 

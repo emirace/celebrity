@@ -36,7 +36,6 @@ function Login() {
         password,
       });
       await getUser();
-      router.push("/dashboard");
     } catch (error) {
       addNotification({
         message: (error as string) || "An error occurred",

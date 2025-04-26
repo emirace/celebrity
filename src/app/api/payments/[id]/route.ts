@@ -127,7 +127,7 @@ export const PUT = auth(async function PUT(req: Request, { params }) {
 
       const user = await User.findByIdAndUpdate(
         payment.userId,
-        { membershilp: membership.name },
+        { membershilp: membership._id },
         { new: true }
       );
       if (!user) {

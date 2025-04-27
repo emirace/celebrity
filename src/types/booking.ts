@@ -7,15 +7,18 @@ export interface IBooking {
   userId: string;
   serviceType: string;
   celebrityId: string;
+  category: string;
   datetime: string;
   status: "Pending" | "Confirmed" | "Cancelled" | "Completed";
 }
 
 export interface IBookingData {
-  fullName: string;
+  name: string;
   email: string;
-  mobile: string;
-  serviceType: string;
+  phone: string;
+  category: string;
+  service: string;
   celebrityId: string;
-  datetime: string;
+  date: string;
+  time: string;
 }

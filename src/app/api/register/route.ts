@@ -1,5 +1,5 @@
 import User from "@/models/user";
-import { NextRequest } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 import connectDB from "@/utils/database";
 
@@ -10,15 +10,17 @@ export async function POST(request: NextRequest) {
   const { username, email, password } = body;
 
   if (!email || !password || !username) {
-    return new Response(`All fields are required`, {
-      status: 400,
-    });
+    return NextResponse.json(
+      { message: "All fields are required" },
+      { status: 400 }
+    );
   }
   const userExists = await User.findOne({ email });
   if (userExists) {
-    return new Response(`User with this email already exists`, {
-      status: 400,
-    });
+    return NextResponse.json(
+      { message: "User with this email already exists" },
+      { status: 400 }
+    );
   }
 
   const hashedPassword = await bcrypt.hash(password, 10);

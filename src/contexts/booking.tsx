@@ -21,7 +21,7 @@ interface BookingContextType {
   loading: boolean;
   error: string | null;
   fetchBookings: () => Promise<void>;
-  createBooking: (data: IBookingData) => Promise<void>;
+  createBooking: (data: IBookingData) => Promise<IBooking>;
   updateBooking: (id: string, data: IBookingData) => Promise<void>;
   deleteBooking: (id: string) => Promise<void>;
   getBookingById: (id: string) => Promise<IBooking | null>;
@@ -44,8 +44,9 @@ export const BookingProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const createBookingHandler = async (data: IBookingData) => {
-    await createBooking(data);
+    const res = await createBooking(data);
     fetchBookings();
+    return res;
   };
 
   const updateBooking = async (id: string, data: IBookingData) => {

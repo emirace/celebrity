@@ -7,6 +7,7 @@ const BookingSchema = new Schema(
     mobile: { type: String, required: true },
     userId: { type: Types.ObjectId, ref: "User", required: true },
     serviceType: { type: String },
+    category: { type: String },
     bookingID: { type: String },
     celebrityId: { type: Types.ObjectId, ref: "User", required: true },
     datetime: { type: Date, required: true },

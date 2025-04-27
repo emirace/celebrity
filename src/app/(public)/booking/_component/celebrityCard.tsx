@@ -1,5 +1,6 @@
 import { IUser } from "@/types/user";
 import Image from "next/image";
+import Link from "next/link";
 import { FC } from "react";
 import { FaStar } from "react-icons/fa";
 
@@ -26,9 +27,12 @@ const CelebrityCard: FC<{ celeb: IUser }> = ({ celeb }) => {
           <FaStar className="mr-1" />
           5.0
         </div>
-        <button className="flex justify-center items-center mt-4 bg-black text-white hover:bg-gray-900 rounded-lg font-medium p-2 w-full transition cursor-pointer">
+        <Link
+          href={`/booking/${celeb._id}`}
+          className="flex justify-center items-center mt-4 bg-black text-white hover:bg-gray-900 rounded-lg font-medium p-2 w-full transition cursor-pointer"
+        >
           Book New
-        </button>
+        </Link>
       </div>
     </div>
   );

@@ -18,7 +18,7 @@ export function auth(
       const authHeader = req.headers.get("authorization");
 
       if (!authHeader || !authHeader.startsWith("Bearer ")) {
-        return new Response(JSON.stringify({ message: "No token provided" }), {
+        return new Response(JSON.stringify({ message: "Unauthorize access" }), {
           status: 401,
         });
       }
@@ -32,10 +32,9 @@ export function auth(
       return handler(req as NextRequest & { user: any }, ctx);
     } catch (err) {
       console.error("Authentication error:", err);
-      return new Response(
-        JSON.stringify({ message: "Invalid or expired token" }),
-        { status: 401 }
-      );
+      return new Response(JSON.stringify({ message: "Unauthorize access" }), {
+        status: 401,
+      });
     }
   };
 }

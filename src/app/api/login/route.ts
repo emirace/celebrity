@@ -1,5 +1,5 @@
 import User from "@/models/user";
-import { NextRequest } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import connectDB from "@/utils/database";
@@ -19,9 +19,10 @@ export async function POST(request: NextRequest) {
   const user = await User.findOne({ email });
 
   if (!user || !(await bcrypt.compare(password, user.password))) {
-    return new Response("Invalid email or password", {
-      status: 401,
-    });
+    return NextResponse.json(
+      { message: "Invalid email or password" },
+      { status: 500 }
+    );
   }
 
   const token = jwt.sign(

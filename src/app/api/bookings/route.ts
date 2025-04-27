@@ -7,19 +7,24 @@ export const POST = auth(async function POST(req) {
   try {
     await connectDB();
 
-    const { fullName, email, mobile, serviceType, celebrityId, datetime } =
+    const { name, email, phone, service, celebrityId, date, time, category } =
       await req.json();
+
+    const datetime = new Date(`${date}T${time}`);
+
     const meet = await Booking.create({
-      fullName,
+      fullName: name,
       email,
-      mobile,
-      serviceType,
+      mobile: phone,
+      serviceType: service,
+      category,
       celebrityId,
       datetime,
       userId: req.user._id,
     });
     return NextResponse.json(meet, { status: 201 });
   } catch (err) {
+    console.log(err);
     return NextResponse.json({ message: err }, { status: 500 });
   }
 });

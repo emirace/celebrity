@@ -1,3 +1,6 @@
+import Booking from "@/models/booking";
+import FanCard from "@/models/fanCard";
+import Meet from "@/models/meet";
 import User from "@/models/user";
 import { auth } from "@/utils/auth";
 import connectDB from "@/utils/database";
@@ -6,9 +9,15 @@ import { NextResponse } from "next/server";
 
 export const GET = auth(async function GET(request) {
   await connectDB();
-  const user = await User.findById(request.user!._id)
+  const userId = request.user!._id;
+
+  const user = await User.findById(userId)
     .select("-password")
     .populate("membership");
+
+  const meetCount = await Meet.countDocuments({ userId });
+  const fancardCount = await FanCard.countDocuments({ userId });
+  const bookingsCount = await Booking.countDocuments({ userId });
 
   if (!user) {
     return new NextResponse("User not found", {
@@ -16,7 +25,16 @@ export const GET = auth(async function GET(request) {
     });
   }
 
-  return new NextResponse(JSON.stringify(user), {
+  const responseData = {
+    user,
+    counts: {
+      meet: meetCount,
+      fancard: fancardCount,
+      bookings: bookingsCount,
+    },
+  };
+
+  return new NextResponse(JSON.stringify(responseData), {
     status: 200,
     headers: { "Content-Type": "application/json" },
   });

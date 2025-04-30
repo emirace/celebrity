@@ -5,6 +5,11 @@ import { NextResponse } from "next/server";
 
 export const GET = auth(async function GET(request) {
   await connectDB();
+  if (request.user.role !== "Admin") {
+    return new NextResponse("Unauthorized", {
+      status: 401,
+    });
+  }
 
   const searchParams = request.nextUrl.searchParams;
   const search = searchParams.get("search");

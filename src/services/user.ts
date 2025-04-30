@@ -43,12 +43,12 @@ export const fetchCelebrities = async (data?: {
   }
 };
 
-export const userFetchCelebrities = async (data?: {
+export const adminFetchCelebrities = async (data?: {
   search?: string;
   page?: number;
 }) => {
   try {
-    const response = await api.get("/users/celebrities/user", {
+    const response = await api.get("/users/celebrities/admin", {
       params: { ...data },
     });
     return response.data;

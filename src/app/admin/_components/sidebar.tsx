@@ -86,7 +86,7 @@ export default function Sidebar() {
               <span className="text-white font-bold text-xs">⭘</span>
             </div>
             {!collapsed && (
-              <span className="font-semibold text-lg text-gray-900">
+              <span className="font-semibold text-lg text-gray-900 whitespace-nowrap">
                 M-Fanstar
               </span>
             )}

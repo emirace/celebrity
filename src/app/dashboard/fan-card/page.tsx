@@ -8,6 +8,7 @@ import moment from "moment";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { QRCodeSVG } from "qrcode.react";
+import Link from "next/link";
 
 function FanCard() {
   const { addNotification } = useToastNotification();
@@ -31,8 +32,16 @@ function FanCard() {
 
   return (
     <div>
-      <div className="text-red-500 text-xl md:text-2xl font-semibold mb-6">
-        My Fan Card
+      <div className="flex items-center justify-between mb-6">
+        <div className="text-red-500 text-xl md:text-2xl font-semibold">
+          My Fan Card
+        </div>
+        <Link
+          href="/fan-card"
+          className="bg-red-500 p-3 py-2 text-white rounded-lg"
+        >
+          Get Your Fan Card
+        </Link>
       </div>
       <div className="min-h-[50rem] w-full bg-gray-100 rounded-lg  p-4">
         {loading ? (

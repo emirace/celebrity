@@ -12,6 +12,7 @@ import { useMeet } from "@/contexts/meet";
 import { useToastNotification } from "@/contexts/toastNotification";
 import Loading from "@/app/_components/loading";
 import Image from "next/image";
+import Link from "next/link";
 
 const tabItems = [
   {
@@ -60,8 +61,16 @@ function Meet() {
 
   return (
     <div>
-      <div className="text-red-500 text-xl md:text-2xl font-semibold mb-6">
-        Meet & Greet
+      <div className="flex items-center justify-between mb-6">
+        <div className="text-red-500 text-xl md:text-2xl font-semibold">
+          Meet & Greet
+        </div>
+        <Link
+          href="/meet"
+          className="bg-red-500 p-3 py-2 text-white rounded-lg"
+        >
+          Book a Meet & Greet
+        </Link>
       </div>
       <div className="h-[50rem] w-full bg-gray-100 rounded-lg  p-4">
         <div className="flex gap-6 mt-4 border-b overflow-x-auto w-full">

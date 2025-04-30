@@ -8,6 +8,11 @@ interface UserContextType {
   user: IUser | null;
   loading: boolean;
   error: string | null;
+  count: {
+    meet: number;
+    fancard: number;
+    bookings: number;
+  };
   getUser: () => Promise<void>;
   updateUser: (profileData: IProfileData) => Promise<void>;
   logout: () => void;
@@ -21,6 +26,11 @@ interface UserProviderProps {
 
 export const UserProvider = ({ children }: UserProviderProps) => {
   const [user, setUser] = useState<IUser | null>(null);
+  const [count, setCount] = useState({
+    meet: 0,
+    fancard: 0,
+    bookings: 0,
+  });
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -30,7 +40,8 @@ export const UserProvider = ({ children }: UserProviderProps) => {
     try {
       const data = await getUserProfile();
       console.log("User data:", data);
-      setUser(data);
+      setUser(data.user);
+      setCount(data.counts);
     } catch (err) {
       throw err;
     }
@@ -69,6 +80,7 @@ export const UserProvider = ({ children }: UserProviderProps) => {
         user,
         loading,
         error,
+        count,
         getUser,
         updateUser,
         logout,

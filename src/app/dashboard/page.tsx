@@ -7,7 +7,7 @@ import { useUser } from "@/contexts/user";
 import Link from "next/link";
 
 const Dashboard = () => {
-  const { user } = useUser();
+  const { user, count } = useUser();
   return (
     <section className="p-4 bg-gray-100 rounded-lg text-gray-900 font-sans">
       <div className="flex flex-col md:flex-row  gap-4 h-full">
@@ -59,18 +59,27 @@ const Dashboard = () => {
                 <h3 className="text-lg font-medium">{user?.fullName}</h3>
                 <p className="text-xs text-gray-400">Nill</p>
                 <div className="flex flex-col w-full mt-6 ">
-                  <div className="flex items-center justify-between bg-gray-100 rounded-lg p-2 mb-3">
+                  <Link
+                    href="/dashboard/meet"
+                    className="flex items-center justify-between bg-gray-100 rounded-lg p-2 mb-3"
+                  >
                     <span>Meet & Greet</span>
-                    <span className="text-gray-400">0</span>
-                  </div>
-                  <div className="flex items-center justify-between bg-gray-100 rounded-lg p-2 mb-3">
+                    <span className="text-gray-400">{count.meet}</span>
+                  </Link>
+                  <Link
+                    href="/dashboard/fab-card"
+                    className="flex items-center justify-between bg-gray-100 rounded-lg p-2 mb-3"
+                  >
                     <span>Fan Card</span>
-                    <span className="text-gray-400">0</span>
-                  </div>
-                  <div className="flex items-center justify-between bg-gray-100 rounded-lg p-2 mb-3">
+                    <span className="text-gray-400">{count.fancard}</span>
+                  </Link>
+                  <Link
+                    href="/dashboard/bookings"
+                    className="flex items-center justify-between bg-gray-100 rounded-lg p-2 mb-3"
+                  >
                     <span>Booking</span>
-                    <span className="text-gray-400">0</span>
-                  </div>
+                    <span className="text-gray-400">{count.bookings}</span>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -134,7 +143,7 @@ const Dashboard = () => {
               <div className="bg-gray-200 p-5 rounded-2xl col-span-1 flex justify-between">
                 <div className="">
                   <h4 className="text-sm font-medium mb-2">
-                    Trackers connected
+                    Celebrity connected
                   </h4>
                   <p className="text-sm text-gray-500 ">3 active connections</p>
                 </div>

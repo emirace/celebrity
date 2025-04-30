@@ -242,7 +242,7 @@ const MeetAndGreetForm: React.FC = () => {
 
           <button
             type="submit"
-            className="flex items-center gap-3 w-full bg-black text-white py-3 px-6 rounded-xl hover:bg-gray-800 transition-all cursor-pointer"
+            className="flex items-center justify-center gap-3 w-full bg-black text-white py-3 px-6 rounded-xl hover:bg-gray-800 transition-all cursor-pointer"
           >
             {loading && <Loading size={20} color="white" />}
             Submit Request

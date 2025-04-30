@@ -25,6 +25,7 @@ export interface IUser {
 
 export interface IProfileData {
   fullName?: string;
+  username?: string;
   email?: string;
   image?: string;
   mobile?: string;

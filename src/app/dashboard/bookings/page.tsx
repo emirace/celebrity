@@ -13,6 +13,7 @@ import { useToastNotification } from "@/contexts/toastNotification";
 import Loading from "@/app/_components/loading";
 import { LuHandshake } from "react-icons/lu";
 import moment from "moment";
+import Link from "next/link";
 
 const tabItems = [
   {
@@ -61,8 +62,16 @@ function Booking() {
 
   return (
     <div>
-      <div className="text-red-500 text-xl md:text-2xl font-semibold mb-6">
-        My Bookings
+      <div className="flex items-center justify-between mb-6">
+        <div className="text-red-500 text-xl md:text-2xl font-semibold">
+          My Bookings
+        </div>
+        <Link
+          href="/booking"
+          className="bg-red-500 p-3 py-2 text-white rounded-lg"
+        >
+          Book Now
+        </Link>
       </div>
       <div className="h-[50rem] w-full bg-gray-100 rounded-lg  p-4">
         <div className="flex gap-6 mt-4 border-b overflow-x-auto w-full">

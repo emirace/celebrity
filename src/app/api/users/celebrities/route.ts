@@ -50,9 +50,7 @@ export const POST = auth(async function POST(request) {
     await connectDB();
 
     if (request.user.role !== "Admin") {
-      return new NextResponse("Unauthorized", {
-        status: 401,
-      });
+      return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
     }
 
     const {
@@ -89,8 +87,9 @@ export const POST = auth(async function POST(request) {
     return NextResponse.json(user, { status: 201 });
   } catch (err) {
     console.log(err);
-    return new NextResponse("Internal Server Error", {
-      status: 500,
-    });
+    return NextResponse.json(
+      { message: "Internal Server Error" },
+      { status: 500 }
+    );
   }
 });

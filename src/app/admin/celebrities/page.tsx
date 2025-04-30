@@ -7,7 +7,7 @@ import { FiEdit, FiSearch, FiTrash2 } from "react-icons/fi";
 import CelebrityForm from "./_components/celebrityForm";
 import { IUser } from "@/types/user";
 import { useToastNotification } from "@/contexts/toastNotification";
-import { deleteCelebrity, fetchCelebrities } from "@/services/user";
+import { adminFetchCelebrities, deleteCelebrity } from "@/services/user";
 import Loading from "@/app/_components/loading";
 import moment from "moment";
 
@@ -25,7 +25,7 @@ function Celebrities() {
   const loadCelebrities = async () => {
     try {
       setLoading(true);
-      const res = await fetchCelebrities({ search, page });
+      const res = await adminFetchCelebrities({ search, page });
       setCelebrities(res.celebrities);
     } catch (error) {
       console.error("Error fetching celebrities:", error);

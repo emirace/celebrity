@@ -25,6 +25,7 @@ const CelebrityForm: React.FC<CelebrityFormProps> = ({
 
   const [formData, setFormData] = useState<IProfileData>({
     fullName: "",
+    username: "",
     email: "",
     image: "",
     mobile: "",
@@ -42,6 +43,7 @@ const CelebrityForm: React.FC<CelebrityFormProps> = ({
     if (celebrity) {
       setFormData({
         fullName: celebrity.fullName,
+        username: celebrity.username,
         job: celebrity.job.join(", "),
         age: celebrity.age,
         nationality: celebrity.nationality,
@@ -60,6 +62,7 @@ const CelebrityForm: React.FC<CelebrityFormProps> = ({
   const validateForm = () => {
     const newErrors: Record<string, string> = {};
     if (!formData.fullName) newErrors.fullName = "Full name is required";
+    if (!formData.username) newErrors.username = "Nickname is required";
     if (!formData.job) newErrors.job = "Profession is required";
     if (!formData.age || formData.age <= 0)
       newErrors.age = "Valid age is required";
@@ -171,7 +174,8 @@ const CelebrityForm: React.FC<CelebrityFormProps> = ({
 
         {[
           { label: "Full Name", name: "fullName" },
-          { label: "Profession", name: "job" },
+          { label: "Nick Name", name: "username" },
+          { label: "Profession (e.g Actor,Singer)", name: "job" },
           { label: "Age", name: "age", type: "number" },
           { label: "Email", name: "email" },
           { label: "Phone Number", name: "mobile" },

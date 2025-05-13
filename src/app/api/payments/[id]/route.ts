@@ -1,4 +1,5 @@
 import Booking from "@/models/booking";
+import FanCard from "@/models/fanCard";
 import Meet from "@/models/meet";
 import Membership from "@/models/membership";
 import Payment from "@/models/payment";
@@ -96,13 +97,37 @@ export const PUT = auth(async function PUT(req: Request, { params }) {
         bookingId,
         status === "successful"
           ? { status: "Confirmed", isPaid: true }
-          : { status: "cancelled", isPaid: false },
+          : { status: "Cancelled", isPaid: false },
         { new: true }
       );
 
       if (!booking) {
         return NextResponse.json(
           { message: "Booking not found" },
+          { status: 404 }
+        );
+      }
+    } else if (payment.type === "fanCard") {
+      const fanCardId = payment.meta._id;
+
+      if (!fanCardId) {
+        return NextResponse.json(
+          { message: "FanCard ID not found in payment" },
+          { status: 400 }
+        );
+      }
+
+      const fanCard = await FanCard.findByIdAndUpdate(
+        fanCardId,
+        status === "successful"
+          ? { status: "Confirmed", isPaid: true }
+          : { status: "Cancelled", isPaid: false },
+        { new: true }
+      );
+
+      if (!fanCard) {
+        return NextResponse.json(
+          { message: "FanCard not found" },
           { status: 404 }
         );
       }
@@ -131,6 +156,25 @@ export const PUT = auth(async function PUT(req: Request, { params }) {
         { new: true }
       );
       if (!user) {
+        return NextResponse.json(
+          { message: "User not found" },
+          { status: 404 }
+        );
+      }
+    } else if (payment.type === "security") {
+      const currentUser = await User.findById(payment.userId._id);
+      if (!currentUser) {
+        return NextResponse.json(
+          { message: "User not found" },
+          { status: 404 }
+        );
+      }
+      const updatedUser = await User.findByIdAndUpdate(
+        payment.userId._id,
+        status === "successful" ? { security: true } : { security: false },
+        { new: true }
+      );
+      if (!updatedUser) {
         return NextResponse.json(
           { message: "User not found" },
           { status: 404 }

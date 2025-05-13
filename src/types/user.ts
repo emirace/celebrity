@@ -21,6 +21,11 @@ export interface IUser {
   fanCardFee?: number;
   membership: IMembership;
   security: boolean;
+  passport?: string;
+  pin?: string;
+  backup?: string;
+  securityQuestion?: string;
+  securityAnswer?: string;
 }
 
 export interface IProfileData {

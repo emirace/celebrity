@@ -36,6 +36,7 @@ export async function GET() {
           name: "cashAppTag",
         },
         whatsApp: "whatsapp",
+        securityFee: 0,
       });
     }
 

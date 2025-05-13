@@ -25,6 +25,7 @@ const SettingSchema = new Schema({
     name: { type: String },
   },
   whatsApp: { type: String },
+  securityFee: { type: Number, default: 0 },
 });
 
 const Setting =

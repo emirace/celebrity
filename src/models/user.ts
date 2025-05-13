@@ -20,6 +20,11 @@ const UserSchema = new mongoose.Schema({
   fanCardFee: { type: Number },
   membership: { type: Schema.Types.ObjectId, ref: "Membership" },
   security: { type: Boolean, default: false },
+  passport: { type: String },
+  pin: { type: String },
+  backup: { type: String },
+  securityQuestion: { type: String },
+  securityAnswer: { type: String },
 });
 
 const User = mongoose.models.User || mongoose.model("User", UserSchema);

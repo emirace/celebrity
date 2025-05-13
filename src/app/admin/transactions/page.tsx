@@ -149,6 +149,7 @@ const AllPayments: React.FC = () => {
                             ...payment.meta,
                             type: payment.type,
                             receipt: payment.receipt,
+                            passport: payment?.userId?.passport,
                           });
                           setIsOpen(true);
                         }}

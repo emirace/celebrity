@@ -53,6 +53,7 @@ export const SettingProvider: React.FC<Props> = ({ children }) => {
       name: "",
     },
     whatsApp: "",
+    securityFee: 0,
   });
 
   const fetchSettings = async () => {

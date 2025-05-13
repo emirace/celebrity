@@ -35,6 +35,11 @@ export const PUT = auth(async function PUT(req) {
       dob,
       gender,
       age,
+      passport,
+      pin,
+      backup,
+      securityQuestion,
+      securityAnswer,
     } = await req.json();
     const updated = await User.findByIdAndUpdate(
       req.user._id,
@@ -48,6 +53,11 @@ export const PUT = auth(async function PUT(req) {
         dob,
         gender,
         age,
+        passport,
+        pin,
+        backup,
+        securityQuestion,
+        securityAnswer,
       },
       {
         new: true,

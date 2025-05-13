@@ -15,8 +15,7 @@ const Membership = () => {
   const [loading, setLoading] = useState(false);
   const [memberships, setMemberships] = useState<IMembership[]>([]);
   const [showModal, setShowModal] = useState(false);
-  const [selectedMembership, setselectedMembership] =
-    useState<IMembership | null>(null);
+  const [selectedMembership, setselectedMembership] = useState<IMembership>();
 
   const loadMembership = async () => {
     try {
@@ -47,28 +46,28 @@ const Membership = () => {
       </div>
       <div className="p-6 ">
         <div className="flex flex-wrap gap-6 ">
-          {memberships.map((data, index) => (
+          {memberships.map((member, index) => (
             <div
               key={index}
               className="relative bg-white rounded-xl flex flex-col items-center cursor-pointer shadow-lg p-4 w-60 flex-shrink-0 text-left"
             >
               <div className="relative w-full h-48 mb-4">
                 <Image
-                  src={data.image}
-                  alt={data.name}
+                  src={member.image}
+                  alt={member.name}
                   layout="fill"
                   objectFit="contain"
                   className="rounded-lg"
                 />
               </div>
-              <h4 className="font-medium text-sm">{data.name}</h4>
+              <h4 className="font-medium text-sm">{member.name}</h4>
               <div className="flex items-center gap-2 mt-2">
-                <span className="font-bold text-xl">{data.price}</span>
+                <span className="font-bold text-xl">{member.price}</span>
               </div>
               <FiEdit
                 className="absolute top-4 right-4"
                 onClick={() => {
-                  setselectedMembership(data);
+                  setselectedMembership(member);
                   setShowModal(true);
                 }}
               />
@@ -89,7 +88,7 @@ const Membership = () => {
             setShowModal(false);
             loadMembership();
           }}
-          membership={selectedMembership!}
+          membership={selectedMembership}
         />
       </Modal>
     </div>

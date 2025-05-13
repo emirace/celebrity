@@ -49,7 +49,7 @@ const Services = () => {
           button="Register Now"
           image1="/images/security.png"
           image2="/images/security2.png"
-          path="/"
+          path="/profile-security"
           inverse={true}
         />
         <ServiceCard

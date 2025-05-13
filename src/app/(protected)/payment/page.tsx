@@ -12,9 +12,11 @@ import { BsBank } from "react-icons/bs";
 import MeetSumary from "./_component/meetSumary";
 import { getMembershipById } from "@/services/membership";
 import { useFanCard } from "@/contexts/fanCard";
+import { useSetting } from "@/contexts/setting";
 
 function Payment() {
   const searchParams = useSearchParams();
+  const { settings } = useSetting();
   const type = searchParams.get("type");
   const id = searchParams.get("id");
   const { getMeetById } = useMeet();
@@ -47,6 +49,8 @@ function Payment() {
             const res = await fetchFanCardById(id);
             setFormData(res);
             setPrice(res?.celebrityId?.fanCardFee || 0);
+          } else if (type === "security") {
+            setPrice(settings.securityFee);
           }
         } catch (error) {
           setError(error as string);

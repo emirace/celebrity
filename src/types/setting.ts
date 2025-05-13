@@ -18,4 +18,5 @@ export interface ISetting {
     password: string;
   };
   whatsApp: string;
+  securityFee: number;
 }

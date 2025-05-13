@@ -11,6 +11,7 @@ type CommonTypes = {
   };
   status: string;
   receipt?: string;
+  passport?: string;
 };
 
 type MeetType = {
@@ -163,10 +164,23 @@ const Detail: FC<IDetailProps> = ({ data }) => {
         <Image
           src={data.receipt}
           alt="Receipt"
-          width={112}
-          height={112}
+          width={250}
+          height={250}
           className="w-28 h-28 object-cover bg-black rounded-xl border-4 border-white shadow-sm"
         />
+      )}
+
+      {data.passport && (
+        <div>
+          <p>Passport</p>
+          <Image
+            src={data.passport}
+            alt="Receipt"
+            width={250}
+            height={250}
+            className="w-28 h-28 object-cover bg-black rounded-xl border-4 border-white shadow-sm"
+          />
+        </div>
       )}
     </div>
   );

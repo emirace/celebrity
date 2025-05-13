@@ -12,7 +12,7 @@ function AddMembership({
   membership,
 }: {
   close: () => void;
-  membership: IMembership;
+  membership?: IMembership;
 }) {
   const { addNotification } = useToastNotification();
   const [uploading, setUploading] = useState(false);
@@ -23,7 +23,9 @@ function AddMembership({
     price: 0,
   });
   useEffect(() => {
-    setFormData(membership);
+    if (membership) {
+      setFormData(membership);
+    }
   }, [membership]);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -87,7 +89,10 @@ function AddMembership({
       <div className="font-bold text-3xl mb-4">
         {membership ? "Edit" : "Add"} Membership
       </div>
-      <label htmlFor={`image`} className="flex flex-col items-center">
+      <label
+        htmlFor={`image`}
+        className="flex flex-col items-center cursor-pointer"
+      >
         {formData.image ? (
           <div className="relative w-full h-48 mb-4">
             <Image
@@ -121,13 +126,14 @@ function AddMembership({
         placeholder="Membership Name"
         className="px-3 py-2 border rounded-lg text-sm focus:outline-none focus:ring focus:ring-red-300"
       />
+      <label>Membership Fee</label>
       <input
         type="number"
         name="price"
         value={formData.price}
         onChange={(e) => handleChange(e)}
         placeholder="Price"
-        className="px-3 py-2 border rounded-lg text-sm focus:outline-none focus:ring focus:ring-red-300"
+        className="px-3 py-2 border rounded-lg text-sm -mt-3 focus:outline-none focus:ring focus:ring-red-300"
       />
       <button
         onClick={handleUpdate}

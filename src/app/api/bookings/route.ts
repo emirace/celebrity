@@ -7,10 +7,12 @@ export const POST = auth(async function POST(req) {
   try {
     await connectDB();
 
-    const { name, email, phone, service, celebrityId, date, time, category } =
+    const { name, email, phone, service, celebrityId, date, category } =
       await req.json();
 
-    const datetime = new Date(`${date}T${time}`);
+    const datetime = new Date(`${date}`);
+
+    console.log(datetime);
 
     const meet = await Booking.create({
       fullName: name,

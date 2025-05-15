@@ -13,6 +13,7 @@ import MeetSumary from "./_component/meetSumary";
 import { getMembershipById } from "@/services/membership";
 import { useFanCard } from "@/contexts/fanCard";
 import { useSetting } from "@/contexts/setting";
+import { useBooking } from "@/contexts/booking";
 
 function Payment() {
   const searchParams = useSearchParams();
@@ -21,6 +22,7 @@ function Payment() {
   const id = searchParams.get("id");
   const { getMeetById } = useMeet();
   const { fetchFanCardById } = useFanCard();
+  const { getBookingById } = useBooking();
 
   const [loading, setLoading] = useState(true);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -49,6 +51,10 @@ function Payment() {
             const res = await fetchFanCardById(id);
             setFormData(res);
             setPrice(res?.celebrityId?.fanCardFee || 0);
+          } else if (type === "booking") {
+            const res = await getBookingById(id);
+            setFormData(res);
+            setPrice(res?.celebrityId?.bookingFee || 0);
           } else if (type === "security") {
             setPrice(settings.securityFee);
           }

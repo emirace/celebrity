@@ -82,7 +82,7 @@ function Booking() {
         ...client,
         celebrityId: id as string,
       });
-      router.push(`/payment?type=meet&id=${res._id}`);
+      router.push(`/payment?type=booking&id=${res._id}`);
     } catch (error) {
       console.log(error);
       throw error;

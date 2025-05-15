@@ -1,3 +1,5 @@
+import { IUser } from "./user";
+
 export interface IBooking {
   _id: string;
   createdAt: string;
@@ -6,7 +8,7 @@ export interface IBooking {
   mobile: string;
   userId: string;
   serviceType: string;
-  celebrityId: string;
+  celebrityId: IUser;
   category: string;
   datetime: string;
   status: "Pending" | "Confirmed" | "Cancelled" | "Completed";

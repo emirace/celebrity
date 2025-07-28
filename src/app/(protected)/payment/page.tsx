@@ -32,6 +32,7 @@ function Payment() {
   const [showCrypto, setShowCrypto] = useState(false);
   const router = useRouter();
   const [price, setPrice] = useState(0);
+  const [currency, setCurrency] = useState("$");
 
   useEffect(() => {
     const loadData = async () => {
@@ -43,20 +44,25 @@ function Payment() {
             const res = await getMeetById(id);
             setFormData(res);
             setPrice(res?.celebrityId?.meetFee || 0);
+            setCurrency(res?.celebrityId?.currency || "$");
           } else if (type === "membership") {
             const res = await getMembershipById(id);
             setFormData(res);
             setPrice(res?.price || 0);
+            setCurrency("$");
           } else if (type === "fanCard") {
             const res = await fetchFanCardById(id);
             setFormData(res);
             setPrice(res?.celebrityId?.fanCardFee || 0);
+            setCurrency(res.celebrityId.currency);
           } else if (type === "booking") {
             const res = await getBookingById(id);
             setFormData(res);
             setPrice(res?.celebrityId?.bookingFee || 0);
+            setCurrency(res?.celebrityId?.currency || "$");
           } else if (type === "security") {
             setPrice(settings.securityFee);
+            setCurrency("$");
           }
         } catch (error) {
           setError(error as string);
@@ -86,43 +92,47 @@ function Payment() {
             </h1>
             <div className="mt-6 flex flex-col gap-6">
               {/* Bank Transfer Option */}
-              <div className="flex flex-col md:flex-row gap-4 md:items-center justify-between p-5 rounded-xl border">
-                <div className="flex items-start gap-4">
-                  <BsBank size={40} />
-                  <div>
-                    <div className="text-2xl font-bold">Bank Transfer</div>
-                    <p className="text-gray-500 text-sm">
-                      Securely transfer funds directly from your mobile bank
-                      account.
-                    </p>
+              {settings.bankingInfo.status && (
+                <div className="flex flex-col md:flex-row gap-4 md:items-center justify-between p-5 rounded-xl border">
+                  <div className="flex items-start gap-4">
+                    <BsBank size={40} />
+                    <div>
+                      <div className="text-2xl font-bold">Bank Transfer</div>
+                      <p className="text-gray-500 text-sm">
+                        Securely transfer funds directly from your mobile bank
+                        account.
+                      </p>
+                    </div>
                   </div>
-                </div>
 
-                <button
-                  onClick={() => setModalOpen(true)}
-                  className="bg-red-500 px-6 text-white font-semibold py-3 rounded-md hover:bg-opacity-70 transition"
-                >
-                  Proceed To Payment
-                </button>
-              </div>
-              <div className="flex flex-col md:flex-row gap-4 md:items-center justify-between p-5 rounded-xl border">
-                <div className="flex items-start gap-4">
-                  <MdCurrencyBitcoin size={40} />
-                  <div>
-                    <div className="text-2xl font-bold">Cryptocurrency</div>
-                    <p className="text-gray-500 text-sm">
-                      Pay using Bitcoin, Ethereum, or other cryptocurrencies.
-                    </p>
+                  <button
+                    onClick={() => setModalOpen(true)}
+                    className="bg-red-500 px-6 text-white font-semibold py-3 rounded-md hover:bg-opacity-70 transition"
+                  >
+                    Proceed To Payment
+                  </button>
+                </div>
+              )}
+              {settings.cryptoStatus && (
+                <div className="flex flex-col md:flex-row gap-4 md:items-center justify-between p-5 rounded-xl border">
+                  <div className="flex items-start gap-4">
+                    <MdCurrencyBitcoin size={40} />
+                    <div>
+                      <div className="text-2xl font-bold">Cryptocurrency</div>
+                      <p className="text-gray-500 text-sm">
+                        Pay using Bitcoin, Ethereum, or other cryptocurrencies.
+                      </p>
+                    </div>
                   </div>
-                </div>
 
-                <button
-                  onClick={() => setShowCrypto(true)}
-                  className="bg-red-500 px-6 text-white font-semibold py-3 rounded-md hover:bg-opacity-70 transition"
-                >
-                  Proceed To Payment
-                </button>
-              </div>
+                  <button
+                    onClick={() => setShowCrypto(true)}
+                    className="bg-red-500 px-6 text-white font-semibold py-3 rounded-md hover:bg-opacity-70 transition"
+                  >
+                    Proceed To Payment
+                  </button>
+                </div>
+              )}
             </div>
           </div>
 
@@ -137,6 +147,7 @@ function Payment() {
           close={() => setModalOpen(false)}
           meta={formData}
           type={type || ""}
+          currency={currency}
         />
       </Modal>
       <Modal isOpen={showCrypto} onClose={() => setShowCrypto(false)}>

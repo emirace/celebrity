@@ -35,6 +35,7 @@ const CelebrityForm: React.FC<CelebrityFormProps> = ({
     address: "",
     job: "",
     age: 0,
+    currency: "$",
   });
 
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -55,6 +56,7 @@ const CelebrityForm: React.FC<CelebrityFormProps> = ({
         meetFee: celebrity.meetFee,
         bookingFee: celebrity.bookingFee,
         fanCardFee: celebrity.fanCardFee,
+        currency: celebrity.currency,
       });
     }
   }, [celebrity]);
@@ -187,6 +189,7 @@ const CelebrityForm: React.FC<CelebrityFormProps> = ({
             type: "select",
             options: ["", "Male", "Female", "Other"],
           },
+          { label: "Currency", name: "currency" },
           { label: "Meeting Fee", name: "meetFee", type: "number" },
           { label: "Booking Fee", name: "bookingFee", type: "number" },
           { label: "Fan Card Fee", name: "fanCardFee", type: "number" },

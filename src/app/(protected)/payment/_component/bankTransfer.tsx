@@ -13,11 +13,13 @@ const BankTransfer = ({
   amount,
   meta,
   type,
+  currency,
 }: {
   close: () => void;
   amount: number;
   meta: object;
   type: string;
+  currency: string;
 }) => {
   const { addNotification } = useToastNotification();
   const { settings, fetchSettings } = useSetting();
@@ -79,7 +81,7 @@ const BankTransfer = ({
       setLoadingPayment(true);
       await processPayment({
         amount,
-        currency: "USD",
+        currency,
         meta,
         paymentMethod: "bank transfer",
         receipt,
@@ -223,7 +225,8 @@ const BankTransfer = ({
           disabled={amount <= 0}
           className="w-full bg-red-500 text-white py-2 rounded-lg font-semibold flex items-center justify-center"
         >
-          I have made Payment (${amount})
+          I have made Payment ({currency}
+          {amount})
         </button>
       )}
       <button

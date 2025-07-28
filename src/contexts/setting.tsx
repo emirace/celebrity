@@ -35,6 +35,7 @@ export const SettingProvider: React.FC<Props> = ({ children }) => {
       bankName: "",
       routing: "",
       address: "",
+      status: true,
     },
     cryptoInfo: [
       {
@@ -44,10 +45,8 @@ export const SettingProvider: React.FC<Props> = ({ children }) => {
         rate: 0,
       },
     ],
-    mail: {
-      name: "",
-      password: "",
-    },
+    cryptoStatus: true,
+    email: "",
     cashApp: {
       tag: "",
       name: "",

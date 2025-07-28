@@ -4,11 +4,13 @@ import { useEffect, useState } from "react";
 import Loading from "../../../_components/loading";
 import { useToastNotification } from "@/contexts/toastNotification";
 import { useSetting } from "@/contexts/setting";
+import { Switch } from "@/app/_components/switch";
 
 const CryptoInfo = () => {
   const { addNotification } = useToastNotification();
   const { settings, fetchSettings, updateSettinngs } = useSetting();
   const [loading, setLoading] = useState(false);
+  const [status, setStatus] = useState(settings.cryptoStatus);
 
   const [formData, setFormData] = useState([
     {
@@ -21,6 +23,7 @@ const CryptoInfo = () => {
 
   useEffect(() => {
     setFormData(settings.cryptoInfo);
+    setStatus(settings.cryptoStatus);
   }, [settings]);
 
   useEffect(() => {
@@ -78,7 +81,11 @@ const CryptoInfo = () => {
 
     try {
       setLoading(true);
-      await updateSettinngs({ ...settings, cryptoInfo: formData });
+      await updateSettinngs({
+        ...settings,
+        cryptoInfo: formData,
+        cryptoStatus: status,
+      });
       addNotification({ message: "Profile updated successfully!" });
     } catch (error) {
       addNotification({
@@ -100,11 +107,16 @@ const CryptoInfo = () => {
 
   return (
     <div className="border-gray-300 border  rounded-lg  w-full ">
-      <div className="p-6 border-gray-300 border-b">
-        <h2 className="text-2xl md:text-4xl font-bold  ">Crypto Information</h2>
-        <span className="block text-gray-600 mb-2">
-          Update your crypto information
-        </span>
+      <div className="p-6 border-gray-300 border-b flex items-center justify-between w-full">
+        <div>
+          <h2 className="text-2xl md:text-4xl font-bold  ">
+            Crypto Information
+          </h2>
+          <span className="block text-gray-600 mb-2">
+            Update your crypto information
+          </span>
+        </div>
+        <Switch checked={status} onChange={() => setStatus(!status)} />
       </div>
       <div className="p-6 ">
         {formData.map((data, index) => (

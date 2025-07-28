@@ -180,13 +180,15 @@ function Celebrities() {
                     <div>
                       <p className="text-sm text-gray-500">Meeting Fee</p>
                       <p className="text-base font-semibold text-gray-800">
-                        ${celebrity.meetFee}
+                        {celebrity.currency}
+                        {celebrity.meetFee}
                       </p>
                     </div>
                     <div>
                       <p className="text-sm text-gray-500">Booking Fee</p>
                       <p className="text-base font-semibold ">
-                        ${celebrity.bookingFee}
+                        {celebrity.currency}
+                        {celebrity.bookingFee}
                       </p>
                     </div>
                   </div>

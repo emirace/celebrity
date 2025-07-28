@@ -26,6 +26,7 @@ export interface IUser {
   backup?: string;
   securityQuestion?: string;
   securityAnswer?: string;
+  currency: string;
 }
 
 export interface IProfileData {
@@ -43,4 +44,5 @@ export interface IProfileData {
   meetFee?: number;
   bookingFee?: number;
   fanCardFee?: number;
+  currency: string;
 }

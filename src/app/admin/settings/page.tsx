@@ -1,4 +1,5 @@
 import BankingInfo from "./_component/bankingInfo";
+import ContactEmail from "./_component/contactEmail";
 import CryptoInfo from "./_component/cryptoInfo";
 import Membership from "./_component/membership";
 import SecurityFee from "./_component/securityFee";
@@ -10,6 +11,7 @@ function Profile() {
       <CryptoInfo />
       <SecurityFee />
       <Membership />
+      <ContactEmail />
     </div>
   );
 }

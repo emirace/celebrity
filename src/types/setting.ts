@@ -5,6 +5,7 @@ export interface ISetting {
     bankName: string;
     routing: string;
     address: string;
+    status: boolean;
   };
   cryptoInfo: {
     name: string;
@@ -12,11 +13,9 @@ export interface ISetting {
     address: string;
     rate: number;
   }[];
+  cryptoStatus: boolean;
   cashApp: { tag: string; name: string };
-  mail: {
-    name: string;
-    password: string;
-  };
+  email: string;
   whatsApp: string;
   securityFee: number;
 }

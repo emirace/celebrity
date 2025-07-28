@@ -60,8 +60,15 @@ export const PUT = auth(async function PUT(req) {
       });
     }
 
-    const { bankingInfo, cryptoInfo, mail, cashApp, whatsApp, securityFee } =
-      await req.json();
+    const {
+      bankingInfo,
+      cryptoInfo,
+      mail,
+      cashApp,
+      whatsApp,
+      securityFee,
+      cryptoStatus,
+    } = await req.json();
 
     if (!bankingInfo || !cryptoInfo || !mail || !cashApp) {
       return NextResponse.json(
@@ -72,7 +79,15 @@ export const PUT = auth(async function PUT(req) {
 
     const updatedSettings = await Setting.findOneAndUpdate(
       {},
-      { bankingInfo, cryptoInfo, mail, cashApp, whatsApp, securityFee },
+      {
+        bankingInfo,
+        cryptoInfo,
+        mail,
+        cashApp,
+        whatsApp,
+        securityFee,
+        cryptoStatus,
+      },
       { new: true, upsert: true }
     );
 

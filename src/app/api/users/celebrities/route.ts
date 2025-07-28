@@ -67,7 +67,9 @@ export const POST = auth(async function POST(request) {
       meetFee,
       bookingFee,
       fanCardFee,
+      currency,
     } = await request.json();
+
     const user = await User.create({
       fullName,
       email,
@@ -83,6 +85,7 @@ export const POST = auth(async function POST(request) {
       meetFee,
       bookingFee,
       fanCardFee,
+      currency,
     });
     return NextResponse.json(user, { status: 201 });
   } catch (err) {

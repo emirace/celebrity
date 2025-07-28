@@ -119,7 +119,10 @@ const AllPayments: React.FC = () => {
                     {payment.userId.fullName || payment.userId.email}
                   </td>
                   <td className="py-3 px-4 capitalize">{payment.type}</td>
-                  <td className="py-3 px-4">${payment.amount.toFixed(2)}</td>
+                  <td className="py-3 px-4">
+                    {payment.currency}
+                    {payment.amount.toFixed(2)}
+                  </td>
                   <td className="py-3 px-4">{payment.currency}</td>
                   <td className="py-3 px-4">{payment.paymentMethod}</td>
                   <td className="py-3 px-4">

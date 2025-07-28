@@ -4,6 +4,7 @@ const membershipSchema = new Schema(
   {
     name: { type: String, required: true },
     image: { type: String, required: true },
+    currency: { type: String, required: true },
     price: { type: Number, required: true },
   },
   {

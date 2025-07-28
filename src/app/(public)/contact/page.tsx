@@ -65,10 +65,10 @@ const Contact = () => {
               Send us an email for inquiries.
             </p>
             <a
-              href={`mailto:${settings.mail.name || "example@gmail.com"}`}
+              href={`mailto:${settings.email || "info@managefanstar.com"}`}
               className="mt-4 text-red-500 underline block"
             >
-              {settings.mail.name || "example@gmail.com"}
+              {settings.email || "info@managefanstar.com"}
             </a>
           </div>
 

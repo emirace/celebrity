@@ -25,6 +25,7 @@ const UserSchema = new mongoose.Schema({
   backup: { type: String },
   securityQuestion: { type: String },
   securityAnswer: { type: String },
+  currency: { type: String, default: "$" },
 });
 
 const User = mongoose.models.User || mongoose.model("User", UserSchema);

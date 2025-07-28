@@ -100,7 +100,7 @@ const AllFanCards: React.FC = () => {
                     </td>
                     <td className="py-3 px-4 font-medium">{card.nickname}</td>
                     <td className="py-3 px-4">{card.fandomTheme}</td>
-                    <td className="py-3 px-4">{card.celebrityId._id}</td>
+                    {/* <td className="py-3 px-4">{card.celebrityId._id}</td> */}
                     <td className="py-3 px-4">
                       <span
                         className={`px-2 py-1 rounded-full text-white text-xs ${

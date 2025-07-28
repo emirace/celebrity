@@ -44,5 +44,5 @@ export interface IProfileData {
   meetFee?: number;
   bookingFee?: number;
   fanCardFee?: number;
-  currency: string;
+  currency?: string;
 }

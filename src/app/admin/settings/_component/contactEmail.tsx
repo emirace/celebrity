@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import Loading from "../../../_components/loading";
 import { useToastNotification } from "@/contexts/toastNotification";
 import { useSetting } from "@/contexts/setting";
-import { Switch } from "@/app/_components/switch";
 
 const ContactEmail = () => {
   const { settings, fetchSettings, updateSettinngs } = useSetting();

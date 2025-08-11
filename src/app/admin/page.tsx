@@ -3,11 +3,13 @@ import React, { useEffect, useState } from "react";
 import { FaSearch, FaTrash } from "react-icons/fa";
 import { IoIosArrowDown } from "react-icons/io";
 import moment from "moment";
-import { fetchAllUsers } from "@/services/user";
+import { fetchAllUsers, updateUserById } from "@/services/user";
 import { IUser } from "@/types/user";
 import Loading from "../_components/loading";
+import { useToastNotification } from "@/contexts/toastNotification";
 
 const AllUsers: React.FC = () => {
+  const { addNotification } = useToastNotification();
   const [users, setUsers] = useState<IUser[]>([]);
   const [search, setSearch] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
@@ -39,6 +41,26 @@ const AllUsers: React.FC = () => {
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage
   );
+
+  const handleUpdate = async (id: string) => {
+    try {
+      const updateData: Record<string, any> = {
+        email: "delected",
+        username: "delected",
+        delected: true,
+      };
+
+      await updateUserById(id, updateData);
+
+      addNotification({ message: "Profile delected successfully!" });
+    } catch (error) {
+      addNotification({
+        message:
+          (error as string) || "An error occurred while updating your profile.",
+        error: true,
+      });
+    }
+  };
 
   return (
     <div className="w-full overflow-hidden">
@@ -123,7 +145,7 @@ const AllUsers: React.FC = () => {
                     </td>
                     <td className="py-3 px-4">
                       <FaTrash
-                        // onClick={() => deleteUser(user._id)}
+                        onClick={() => handleUpdate(user._id)}
                         className="text-red-500 text-xl cursor-pointer"
                       />
                     </td>

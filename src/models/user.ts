@@ -5,7 +5,7 @@ const UserSchema = new mongoose.Schema({
   fullName: { type: String },
   image: { type: String },
   age: { type: Number },
-  email: { type: String, required: true, unique: true },
+  email: { type: String, required: true },
   password: { type: String },
   job: [{ type: String }],
   role: { type: String, enum: ["Admin", "User", "Celebrity"], default: "User" },
@@ -26,6 +26,7 @@ const UserSchema = new mongoose.Schema({
   securityQuestion: { type: String },
   securityAnswer: { type: String },
   currency: { type: String, default: "$" },
+  deleted: { type: Boolean, default: false },
 });
 
 const User = mongoose.models.User || mongoose.model("User", UserSchema);

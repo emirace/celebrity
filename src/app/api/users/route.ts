@@ -11,9 +11,10 @@ export const GET = auth(async function GET(request) {
     });
   }
 
-  const users = await User.find({ role: { $ne: "Celebrity" } }).select(
-    "-password"
-  );
+  const users = await User.find({
+    role: { $ne: "Celebrity" },
+    delected: false,
+  }).select("-password");
 
   return new NextResponse(JSON.stringify(users), {
     status: 200,
